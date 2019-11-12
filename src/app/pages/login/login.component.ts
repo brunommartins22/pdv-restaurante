@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     this.credentials = new Credentials();
     this.processando = false;
     document.getElementById("login").focus();
+    document.body.classList.add("body-img");
   }
 
   logar() {

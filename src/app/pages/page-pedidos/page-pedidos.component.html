@@ -1,0 +1,58 @@
+<processo [componente]="this" [titulo]="tituloPedidos">
+
+    <div class="ui-g">
+        <div class="ui-g-12" *ngIf="!renderizarPedidos">
+
+            <div class="ui-g-12 ui-md-2">
+                <p-panel header="Status(Mesa)" [style]="{'text-align':'center'}">
+
+                    <div class="row pt-1">
+                        <div class="pt-3 mr-1" style="width:15px;background-color:#5CB85C;"></div>
+                        <label> Livre </label>
+                    </div>
+                    <div class="row pt-1">
+                        <div class="pt-3 mr-1" style="width:15px;background-color:#1C7CD5;"></div>
+                        <label> Ocupada </label>
+                    </div>
+                    <div class="row pt-1">
+                        <div class="pt-3 mr-1" style="width:15px;background-color:#D9534F;"></div>
+                        <label> Inativa </label>
+                    </div>
+                    <div class="row pt-1">
+                        <div class="pt-3 mr-1" style="width:15px;background-color:#F0AD4E;"></div>
+                        <label> Reservada </label>
+                    </div>
+
+                </p-panel>
+            </div>
+            <div class="ui-g-12 ui-md-10">
+                <p-dataView [value]="dadosPedidos" layout="grid">
+                    <!-- <p-header>
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </p-header> -->
+                    <!-- <ng-template let-pedido pTemplate="listItem">
+                    <div>
+                        {{pedido.id}}
+                    </div>
+                </ng-template> -->
+                    <ng-template let-pedido pTemplate="gridItem">
+                        <div class="ui-g-12 ui-md-2 ui-lg-1" (click)="editarPedido()">
+                            <div [ngClass]="pedido.status=='ocupado'?'ocupado':pedido.status=='inativo'?'inativo':pedido.status=='reservado'?'reservado':'livre'">
+                                <img src="../../../assets/images/{{pedido.status=='inativo'?'ocupado':pedido.status}}.png" class="mt-2" width="75">
+                                <hr class="ui-widget-content" style="border-top:0">
+                                <label style="position: relative;top: -4px;">Mesa {{pedido.id}}</label>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+            </div>
+
+        </div>
+
+        <div class="ui-g-12" *ngIf="renderizarPedidos">
+            entrou
+        </div>
+
+    </div>
+
+</processo>

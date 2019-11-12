@@ -2,25 +2,120 @@
 <html>
 
 <head>
-  <script>document.write('<base href="' + document.location + '" />');</script>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>Clube de Promoção</title>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Clube de Promoção</title>
 
-  <link rel="stylesheet" type="text/css" href="/assets/theme/theme-teal-yellow.css">
-  <link rel="stylesheet" type="text/css" href="/assets/layout/css/layout-teal-yellow.css">
-
+    <link rel="stylesheet" type="text/css" href="/assets/theme/theme-teal-yellow.css">
+    <link rel="stylesheet" type="text/css" href="/assets/layout/css/layout-teal-yellow.css">
+    <style>
+        body {
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            margin: 0 0 60px;
+            background-image: url("../src/assets/images/pdv-tela-login.png") !important;
+            background-size: cover;
+            background-repeat: no-repeat !important;
+            /* altura do seu footer */
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.5);
+            text-align: right !important;
+        }
+        
+        .inputUser {
+            width: 240px !important;
+            height: 25px !important;
+            /* O padding influencia no tamanho do componente (é como se fosse 20px + 5px da altura) */
+            background-image: url(./principal/images/usuario_login.png) !important;
+            background-repeat: no-repeat !important;
+            /* Para não repetir o background ao longo de topo o componente */
+            background-position: right !important;
+            background-position-x: 220px !important;
+            background-size: 20px !important;
+            font-size: 15px !important;
+            border-color: #B0B2B4 !important;
+            font-family: arial !important;
+        }
+        
+        .inputPassword {
+            width: 240px !important;
+            height: 25px !important;
+            /* O padding influencia no tamanho do componente (é como se fosse 20px + 5px da altura) */
+            background-image: url(./principal/images/cadeado_login.png) !important;
+            background-repeat: no-repeat !important;
+            /* Para não repetir o background ao longo de topo o componente */
+            background-position: right !important;
+            background-position-x: 220px !important;
+            background-size: 20px !important;
+            font-size: 15px !important;
+            border-color: #B0B2B4;
+            margin-left: -1px !important;
+            font-family: arial !important;
+        }
+        
+        .divLoginPrincipal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -175px;
+            margin-left: -175px;
+            width: 350px;
+            background: rgba(255, 255, 250, 0.90);
+            height: 350px;
+            border-radius: 5px;
+        }
+        
+        .loginImgContent {
+            height: 335px !important;
+            margin-left: -5px;
+            margin-top: -6px;
+        }
+        
+        .divLoginValue {
+            margin-top: 60px;
+        }
+        
+        .outputLogin {
+            color: #0067B8;
+            font-size: 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .outputContaLogin {
+            color: #0067B8;
+            font-size: 14px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .imgCloseLogin {
+            float: right;
+            position: relative;
+            top: -60px !important;
+            cursor: pointer !important;
+        }
+    </style>
 </head>
-
-<body class="login-body" style="background-image: linear-gradient(235deg, #565867, #191a25);">
-  <div class="ui-g">
+<!-- 
+<body class=" login-body" style="background-image: linear-gradient(235deg, #565867, #191a25);">
+ <div class="ui-g">
     <div class="ui-g-12" style="text-align:center">
       <img src="assets/layout/images/logo-interage.png" class="logo" />
     </div>
   </div>
-  <div class="login-panel ui-fluid">
+  <div class=" login-panel ui-fluid">
     <div class="ui-g">
       <div class="ui-g-6 left-side">
         <img src="assets/layout/images/login/login-photo1.png" class="login-image" />
@@ -68,6 +163,89 @@
   </div>
 
 
+</body>  -->
+
+
+<body>
+    <div class="divLoginPrincipal ui-g ui ui-fluid">
+        <div class="ui-g-12 divLoginValue " style="text-align: center">
+            <div class="ui-g-12 container">
+                <h2>Faça o Login para Entrar</h2>
+            </div>
+            <form (submit)="logar()">
+                <div class="ui-g-10 pl-5">
+                    <label for="username" value="Usuário"></label>
+                    <div class="input-wrapper">
+                        <input type="text" name="login" autocomplete="off" id="login" placeholder="Usuário" class="ui-inputtext ui-widget" [disabled]="processando" [(ngModel)]="credentials.login" />
+                        <i class="fa fa-user" style="position: relative;top: -25px;left:-5px;float: right;"></i>
+                    </div>
+                </div>
+                <div class="ui-g-10 pl-5">
+                    <label for="password" value="Senha"></label>
+                    <div class="input-wrapper">
+                        <input type="password" name="id" id="password" autocomplete="off" placeholder="Senha" class="ui-inputtext ui-widget" [disabled]="processando" required [(ngModel)]="credentials.password" />
+                        <i class="fa fa-lock" style="position: relative;top: -25px;left:-5px;float: right;"></i>
+                    </div>
+                </div>
+                <div class="ui-g-10 button-container pl-5">
+                    <button type="submit" id="btn_user" pButton [disabled]="processando" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only blue-btn raised-btn">
+            <span class="ui-button-text ui-c">Entrar</span>
+          </button>
+
+
+                    <p-messages [value]="msgs"></p-messages>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
+
+
+<!-- <h:panelGroup id="user">
+
+      <div class="divLoginPrincipal ui-g">
+
+        <div class="ui-g-12 divLoginValue" style="text-align: center">
+          <h:outputText value="#{loginView.isLogin ? 'Faça o Login para Entrar':'Preencha os campos abaixo'}"
+            class="outputLogin" />
+          <h:panelGroup rendered="#{!loginView.isLogin}">
+            <img src="./principal/images/iconValidacaoFechar.svg" height="20px" onclick="voltarLink()" title="Voltar"
+              class="imgCloseLogin" />
+          </h:panelGroup>
+          <br /><br /><br />
+          <p:inputText value="#{loginView.nomeUsuario}" id="userId" styleClass="inputUser" placeholder="Usuario" />
+          <br /><br />
+          <p:password value="#{loginView.senha}" styleClass="inputPassword" placeholder="Senha" />
+          <br /><br />
+          <p:commandButton value="Entrar" action="#{loginView.confirmarUsuario()}" update=":geral,geral:mensagem"
+            id="entrar" class="buttonSetting" oncomplete="confirmarOncompelte(xhr, status, args)"
+            rendered="#{loginView.isLogin}"
+            style="width: 250px !important;height: 30px !important;font-size: 14px !important" />
+          <p:commandButton value="Criar Conta" action="#{loginView.salvarUser()}" update=":geral,geral:mensagem"
+            class="buttonSetting" rendered="#{!loginView.isLogin}" oncomplete="criarOncomplete(xhr, status, args)"
+            style="width: 250px !important;height: 30px !important;font-size: 14px !important" />
+          <br /><br /><br />
+          <div style="text-align: left;position: relative;left: 40px">
+            <h:outputText value="Não tem uma conta?" class="outputContaLogin" rendered="#{loginView.isLogin}" />
+            <br />
+            <p:commandLink value="- Cadastre-se" onclick="iniciarLink()" rendered="#{loginView.isLogin}"
+              style="color: #14477a;font-size: 12px !important;position: relative;top: 5px" />
+          </div>
+        </div>
+      </div>
+    </h:panelGroup>
+
+
+  <script>
+    setarfoco('geral:userId');
+  </script> -->
+
+<footer>
+    <!--<p style="font-size: 11px; font-family: 'Open Sans', sans-serif !important;color: white;position: relative;top: -5px;left: -30px !important"> © 2018 Interage Sistemas - Copyright </p>-->
+    <a href="http://interagese.com.br/" target="_blank" title="Visite nosso Site" style="font-size: 12px;color: white;position: relative;top: 5px;left: -10px;cursor: pointer"> © 2019 Interage
+    Sistemas - version - 1.00.00 - Copyright</a>
+</footer>
 
 </html>

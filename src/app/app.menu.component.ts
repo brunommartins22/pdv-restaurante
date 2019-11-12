@@ -1,9 +1,6 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem, ScrollPanel } from 'primeng/primeng';
-import { AppComponent } from './app.component';
 import { RaizComponent } from './raiz/raiz.component';
 import { UsuarioService } from './services/usuario.service';
 
@@ -32,11 +29,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                 ]
             },
             {
-                label: 'Integração', icon: 'fa fa-fw fa-compress', badge: 3,
+                label: 'Restaurante', icon: 'fa fa-fw fa-compress', badge: 1,
                 items: [
-                    { label: 'Consulta de Promoção', icon: 'fa fa-fw fa-search', routerLink: ['/sys/consulta-promocao-scanntech'] },
-                    { label: 'Consulta de Vendas', icon: 'fa fa-fw fa-search', routerLink: ['/sys/consulta-vendas'] },
-                    { label: 'Sincronização de Vendas', icon: 'fa fa-fw fa-refresh', routerLink: ['/sys/sincronizacao-vendas'] }
+                    { label: 'Pedidos Pdv', icon: 'fa fa-fw fa-search', routerLink: ['/sys/pedidos'] }
+                   
                 ]
             },
             {
@@ -64,7 +60,7 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
             {
                 label: 'Configuração', icon: 'fa fa-fw fa-cog',
                 items: [
-                    { label: 'Scanntech', icon: 'fa fa-fw fa-cogs', routerLink: ['/sys/configuracao-scanntech'] },
+                    // { label: 'Scanntech', icon: 'fa fa-fw fa-cogs', routerLink: ['/sys/configuracao-scanntech'] },
                     {
                         label: 'Layout', icon: 'fa fa-fw fa-bars', badge: 5,
                         items: [

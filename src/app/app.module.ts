@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import ptBr from '@angular/common/locales/pt';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { AppRoutes } from './app.routes';
-
-
+import { PadraoModule } from 'padrao';
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -18,8 +17,8 @@ import { ChartModule } from 'primeng/chart';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChipsModule } from 'primeng/chips';
 import { CodeHighlighterModule } from 'primeng/codehighlighter';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
@@ -40,8 +39,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
-import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { OrderListModule } from 'primeng/orderlist';
 import { OrganizationChartModule } from 'primeng/organizationchart';
@@ -61,8 +60,8 @@ import { SliderModule } from 'primeng/slider';
 import { SpinnerModule } from 'primeng/spinner';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { StepsModule } from 'primeng/steps';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { TableModule } from 'primeng/table';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import { TerminalModule } from 'primeng/terminal';
 import { TieredMenuModule } from 'primeng/tieredmenu';
@@ -73,29 +72,24 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
-
-
-
-import { AppComponent } from './app.component';
-import { AppRightPanelComponent } from './app.rightpanel.component';
-import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
-import { AppTopBarComponent } from './app.topbar.component';
-import { AppFooterComponent } from './app.footer.component';
-
-import { PageModule } from './page.module';
-import { RaizComponent } from './raiz/raiz.component';
-import { PadraoModule } from 'padrao';
 import { environment } from 'src/environments/environment';
-import { PageCidadeComponent } from './pages/page-cidade/page-cidade.component';
-
-import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-import ptBr from '@angular/common/locales/pt';
+import { AppComponent } from './app.component';
+import { AppFooterComponent } from './app.footer.component';
+import { AppMenuComponent, AppSubMenuComponent } from './app.menu.component';
+import { AppRightPanelComponent } from './app.rightpanel.component';
+import { AppRoutes } from './app.routes';
+import { AppTopBarComponent } from './app.topbar.component';
+import { PageModule } from './page.module';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
-import { PageScantechConfigComponent } from './pages/page-scanntech-config/page-scantech-config.component';
-import { PageConsultaPromocaoComponent } from './pages/page-consulta-promocao/page-consulta-promocao.component';
-import { PageSincronizacaoVendas } from './pages/page-sincronizacao-vendas/page-sincronizacao-vendas.component';
-import { PageConsultaVendas } from './pages/page-consulta-vendas/page-consulta-vendas.component';
+import { PagePedidosComponent } from './pages/page-pedidos/page.pedidos.component';
+import { RaizComponent } from './raiz/raiz.component';
+
+
+
+
+
+
+
 registerLocaleData(ptBr)
 
 @NgModule({
@@ -185,12 +179,9 @@ registerLocaleData(ptBr)
         RaizComponent,
 
 
-        PageCidadeComponent,
         PageHomeComponent,
-        PageScantechConfigComponent,
-        PageConsultaPromocaoComponent,
-        PageSincronizacaoVendas,
-        PageConsultaVendas
+        PagePedidosComponent
+
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
