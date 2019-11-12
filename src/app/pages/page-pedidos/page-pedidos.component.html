@@ -38,7 +38,7 @@
                     <ng-template let-pedido pTemplate="gridItem">
                         <div class="ui-g-12 ui-md-2 ui-lg-1" (click)="editarPedido()">
                             <div [ngClass]="pedido.status=='ocupado'?'ocupado':pedido.status=='inativo'?'inativo':pedido.status=='reservado'?'reservado':'livre'">
-                                <img src="../../../assets/images/{{pedido.status=='inativo'?'ocupado':pedido.status}}.png" class="mt-2" width="75">
+                                <img src="../../../assets/images/{{pedido.status=='inativo'?'ocupado':pedido.status}}.png" class="mt-2" width="60">
                                 <hr class="ui-widget-content" style="border-top:0">
                                 <label style="position: relative;top: -4px;">Mesa {{pedido.id}}</label>
                             </div>
