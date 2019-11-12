@@ -81,9 +81,6 @@ export class PagePedidosComponent extends ProcessoRestauranteComponent {
         document.body.classList.remove("body-img")
         this.carregarList();
 
-
-        console.log(this.dadosPedidos)
-
     }
 
     editarPedido() {
