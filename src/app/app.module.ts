@@ -1,3 +1,5 @@
+import { PageFornecedorComponent } from './pages/page-fornecedor/page-fornecedor.component';
+import { PageSecaoComponent } from './pages/page-secao/page-secao.component';
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
@@ -83,6 +85,7 @@ import { PageModule } from './page.module';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PagePedidosComponent } from './pages/page-pedidos/page.pedidos.component';
 import { RaizComponent } from './raiz/raiz.component';
+import { PageDepartamentoComponent } from './pages/page-departamento/page-departamento.component';
 
 
 
@@ -180,7 +183,10 @@ registerLocaleData(ptBr)
 
 
         PageHomeComponent,
-        PagePedidosComponent
+        PagePedidosComponent,
+        PageSecaoComponent,
+        PageDepartamentoComponent,
+        PageFornecedorComponent,
 
     ],
     providers: [

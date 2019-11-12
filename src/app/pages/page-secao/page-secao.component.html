@@ -1,0 +1,19 @@
+<crud [componente]="this" [permissao]="" titulo="Seção">
+
+    <div detalhes>
+
+        <div class="row">
+            <div class="ui-g-12" *ngIf="objetoSelecionado.id != undefined && objetoSelecionado.id != null">
+                <inputText id="id" md="3" disabled="true" label="ID" [(ngModel)]="objetoSelecionado.id"></inputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-3">
+                <inputText id="secao" md="12" autoWidth="false" label="Seção" [(ngModel)]="objetoSelecionado.nmSecao">
+                </inputText>
+            </div>
+         </div>
+
+          {{this.objetoSelecionado | json}}
+
+    </div>
+</crud>

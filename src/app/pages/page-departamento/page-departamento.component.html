@@ -1,0 +1,26 @@
+<crud [componente]="this" [permissao]="" titulo="Departamento">
+
+    <div detalhes>
+
+        <div class="row">
+
+            <div class="ui-g-12" *ngIf="objetoSelecionado.id != undefined && objetoSelecionado.id != null">
+                <inputText id="id" md="2" disabled="true" label="ID" [(ngModel)]="objetoSelecionado.id"></inputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+                <inputText id="departamento" label="Departamento" autoWidth="false" [(ngModel)]="objetoSelecionado.nomeDepartamento">
+                </inputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-2" style="position: relative;top: 2px;">
+                <label>Seção</label><br>
+                <p-dropdown id="secaoFiltro" autoWidth="false" [style]="{'width': '100%'}" [filter]="true"
+                    [options]="listaSecao" [(ngModel)]="objetoSelecionado.secao">
+                </p-dropdown>
+            </div>
+
+        </div>
+        <!-- {{this.objetoSelecionado | json}} -->
+    </div>
+</crud>

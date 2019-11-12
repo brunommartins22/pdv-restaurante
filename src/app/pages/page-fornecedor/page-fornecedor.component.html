@@ -1,0 +1,19 @@
+<crud [componente]="this" [permissao]="" titulo="Fornecedor">
+    <div detalhes>
+        <div class="row">
+            <div class="ui-g-12" *ngIf="objetoSelecionado != null && objetoSelecionado != undefined">
+                <inputText id="id" md="1" disabled="true" label="ID" [(ngModel)]="objetoSelecionado"></inputText>
+            </div >
+
+            <div class="ui-g-12 ui-md-3">
+                <inputText id="Fornecedor" label="Fornecedor" autoWidth="false" [(ngModel)]="objetoSelecionado"></inputText>
+            </div>
+            <div class="ui-g-12 ui-md-2">
+                <label>CNPJ/CPF</label>
+                <inputText id="cpfCnpj" md="12" autoWidth="false" [(ngModel)]="objetoSelecionado">
+                </inputText>
+            </div>
+        </div>
+
+    </div>
+</crud>

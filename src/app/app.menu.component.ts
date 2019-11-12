@@ -25,14 +25,17 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
             {
                 label: 'Cadastros', icon: 'fa fa-fw fa-plus-circle', badge: 1,
                 items: [
-                    { label: 'Usuário', icon: 'fa fa-fw fa-user', routerLink: ['/sys/usuario'] }
+                    { label: 'Usuário', icon: 'fa fa-fw fa-user', routerLink: ['/sys/usuario'] },
+                    { label: 'Secao', icon: 'fa fa-fw fa-user', routerLink: ['/sys/secao'] },
+                    { label: 'Departamento', icon: 'fa fa-fw fa-user', routerLink: ['/sys/Departamento'] },
+                    { label: 'Fornecedor', icon: 'fa fa-fw fa-user', routerLink: ['/sys/Fornecedor'] }
                 ]
             },
             {
                 label: 'Restaurante', icon: 'fa fa-fw fa-compress', badge: 1,
                 items: [
                     { label: 'Pedidos Pdv', icon: 'fa fa-fw fa-search', routerLink: ['/sys/pedidos'] }
-                   
+
                 ]
             },
             {
