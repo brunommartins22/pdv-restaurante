@@ -1,19 +1,63 @@
 <crud [componente]="this" [permissao]="" titulo="Fornecedor">
     <div detalhes>
-        <div class="row">
-            <div class="ui-g-12" *ngIf="objetoSelecionado != null && objetoSelecionado != undefined">
-                <inputText id="id" md="1" disabled="true" label="ID" [(ngModel)]="objetoSelecionado"></inputText>
-            </div >
 
-            <div class="ui-g-12 ui-md-3">
-                <inputText id="Fornecedor" label="Fornecedor" autoWidth="false" [(ngModel)]="objetoSelecionado"></inputText>
-            </div>
-            <div class="ui-g-12 ui-md-2">
-                <label>CNPJ/CPF</label>
-                <inputText id="cpfCnpj" md="12" autoWidth="false" [(ngModel)]="objetoSelecionado">
+        <div class="row">
+            <div class="ui-g-12" *ngIf="objetoSelecionado.id != null || objetoSelecionado.id != undefined">
+                <inputText id="id" md="1" disabled="true" label="Código" [(ngModel)]="objetoSelecionado.id">
                 </inputText>
             </div>
+
+            <div class="ui-g-12 ui-md-4 mb-1">
+                <label>Tipo Pessoa</label><br>
+                <p-dropdown id="tipoPessoa" (onChange)="limpaCamposTipoPessoa()" [options]="pessoafisica"
+                    [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa" [style]="{'width':'100% !important','border':'1px solid #00B5B8'}"
+                    >
+                </p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-4">
+                <inputText id="razaoSocial" maxlength="60" md="12"
+                    [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'"
+                    [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-4">
+                <inputText id="fantasia" maxlength="60" md="10" label="Fantasia"
+                    [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+                <inputMask id="cnpjCpf" maxlength="19" md="12" class="abc"
+                    [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'"
+                    [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'"
+                    [(ngModel)]="objetoSelecionado.cnpjCpf"
+                    [placeholder]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '___.___.___-__': '__.___.___/____-__'">
+                </inputMask>
+             </div>
+
+
+            <div class="ui-g-12 ui-md-2">
+                <inputText id="ieRg" maxlength="12" md="12"
+                    [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
+                    [(ngModel)]="objetoSelecionado.pessoa.ieRg" >
+                </inputText>
+             </div>
+
+
+                <div class="ui-g-12 ui-md-2 ">
+                    <inputMask id="fone" md="12" autocomplete="off" placeholder="(___) _ ____-____"  label="Telefone"
+                        [(ngModel)]="objetoSelecionado.pessoa.listTelefone" mask="(999) 9 9999-9999"
+                        ></inputMask>
+                </div>
+
+                <div class="ui-g-12 ui-md-5  ">
+                    <inputText id="email" autocomplete="off" md="12" label="Email" maxlength="100" [(ngModel)]="objetoSelecionado.email">
+                    </inputText>
+                </div>
+
+
         </div>
 
     </div>
+
 </crud>
