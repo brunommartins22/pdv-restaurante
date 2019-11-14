@@ -57,10 +57,10 @@
 
                         <div style="position: relative;top: -5px;">
 
-                            <button label="Incluir" (click)="editlistEndereco()" icon="fa fa-edit" pButton></button>
-                            <button label="Editar" (click)="editlistEndereco()" icon="fa fa-edit" pButton></button>
-                            <button label="Atualizar" (click)="editlistEndereco()" icon="fa fa-edit" pButton></button>
-                            <button label="Remover" (click)="editlistEndereco()" icon="fa fa-edit" pButton></button>
+                            <button label="Incluir" (click)="listEndereco.acaoAdd()" icon="fa fa-plus" pButton></button>
+                            <button label="Editar" (click)="listEndereco.acaoEdit()" icon="fa fa-edit" pButton></button>
+                            <button label="Atualizar" (click)="listEndereco.acaoUpdate()" icon="pi pi-refresh" pButton></button>
+                            <button label="Remover" (click)="listEndereco.acaoDelete()" icon="fa fa-trash" pButton></button>
 
                         </div>
                     </ng-template>
@@ -94,9 +94,15 @@
                     </ng-template>
                 </p-table>
 
-
-                <formendereco [(objetoEnderecoSelecionado)]="objetoSelecionado"></formendereco>
-
+                <div>
+                    <formendereco [(objetoEnderecoSelecionado)]="objetoSelecionado"></formendereco>
+                    <p-footer>
+                        <button pButton icon="fa fa-check" (click)="confirmDialogAlterPassword()"
+                            label="Confirmar"></button>
+                        <button pButton icon="fa fa-times" (click)="closeDialogAlterPassword()"
+                            label="Cancelar"></button>
+                    </p-footer>
+                </div>
                 <!-- <p-dialog header="Alterar Senha Usuário" [(visible)]="display" [modal]="false" [responsive]="true"
                     [style]="{width: '250px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
                     <div class="row">

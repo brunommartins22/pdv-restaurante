@@ -11,7 +11,7 @@ export class PageFornecedorComponent extends CrudComponent {
     listEndereco: any;
     display: boolean = true;
     item: any;
-    endereco: boolean;
+    endereco = {};
     pessoafisica = [
         { label: 'Pessoa Fisica', value: 'FISICA' },
         { label: 'Pessoa Juridica', value: 'JURIDICA' },
@@ -62,6 +62,10 @@ export class PageFornecedorComponent extends CrudComponent {
         this.objetoSelecionado.ieRg = null;
     }
 
+    acaoAdd() {
+        this.renderizarListagem = false;
+        this.endereco = {};
+    }
 
 
 }
