@@ -8,24 +8,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageFornecedorComponent extends CrudComponent {
 
-    listEndereco: any;
-    display: boolean = true;
-    item: any;
-    endereco = {};
-    pessoafisica = [
-        { label: 'Pessoa Fisica', value: 'FISICA' },
-        { label: 'Pessoa Juridica', value: 'JURIDICA' },
+    isVisibleEndereco: boolean = false;
+    isVisibleTelefone: boolean = false;
 
-    ];
+    listaPessoas = [];
+    statusEndereco = [];
+
+    enderecoSelecionado: any = null;
+    telefoneSelecionado: any = null;
+
+
+    /*************************** init method ****************************/
+
+    private loadPessoas() {
+        this.listaPessoas = new Array();
+        this.listaPessoas.push({ label: 'Pessoa Fisica', value: 'FISICA' }),
+            this.listaPessoas.push({ label: 'Pessoa Juridica', value: 'JURIDICA' });
+    }
+
+    private loadStatusEndereco() {
+        this.statusEndereco = new Array();
+        this.statusEndereco.push({ label: 'Ativo', value: true }),
+            this.statusEndereco.push({ label: 'Inativo', value: false });
+    }
+
+    /*************************** end method ****************************/
 
     instance() {
         this.objetoSelecionado = new Object();
         this.objetoSelecionado.pessoa = new Object();
+        this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
+        this.objetoSelecionado.pessoa.listEndereco = new Array();
+        this.objetoSelecionado.pessoa.listTelefone = new Array();
+        this.enderecoSelecionado = new Object();
     }
+
 
     ngOnInit() {
 
         document.body.classList.remove('body-img');
+
         super.iniciar('/fornecedores');
 
         this.cols = [
@@ -34,37 +56,65 @@ export class PageFornecedorComponent extends CrudComponent {
             { field: 'cnpjCpf', header: 'CNPJ / CPF', width: '30px' },
             { field: 'ieRg', header: 'IE / RG', width: '20px' },
             { field: 'email', header: 'Email', width: '30px' },
-
-
-            // { field: 'endereco', subfild: ' logradouro', header: 'Logradouro', width: '70px' },
-            // { field: 'endereco', subfild: 'cep', header: 'Cep', width: '10px' },
-            // { field: 'endereco', subfild: 'bairro', header: 'Bairro', width: '10px' },
-            // { field: 'endereco', subfild: 'complemento', header: 'Complemento', width: '30px' },
-            // { field: 'endereco', subfild: 'numero', header: 'numero', width: '10px' },
-            // { field: 'endereco', subfild: 'cidade', header: 'cidade', width: '20px' },
-            // { field: 'endereco', subfild: 'estado', header: 'estado', width: '10px' }
         ];
 
+        this.loadPessoas();
+        this.loadStatusEndereco();
 
-
-    }
-
-    getListEndereco() {
-        this.httpUtilService.get(this.urlControler + '/pessoa').subscribe(data => {
-            this.listEndereco = data.json;
-        });
-    }
-
-
-
-    limpaCamposTipoPessoa() {
-        this.objetoSelecionado.cnpjCpf = null;
-        this.objetoSelecionado.ieRg = null;
     }
 
     acaoAdd() {
         this.renderizarListagem = false;
-        this.endereco = {};
+
+    }
+
+    /****************** Dialog Endereco *********************/
+
+    adicionarEndereco() {
+        this.enderecoSelecionado = new Object();
+        this.enderecoSelecionado.ativo = true;
+        this.isVisibleEndereco = true;
+    }
+
+    editarEndereco() {
+        this.isVisibleEndereco = true;
+    }
+
+    removerEndereco() {
+        this.isVisibleEndereco = true;
+    }
+
+
+    onRowSelectEndereco(event) {
+        this.enderecoSelecionado = event.data;
+    }
+
+    onRowUnselectEndereco(event) {
+        this.enderecoSelecionado = event.data;
+    }
+
+
+    /****************** Dialog Telefone *********************/
+
+    adicionarTelefone() {
+        this.telefoneSelecionado = new Object();
+        this.isVisibleTelefone = true;
+    }
+
+    editarTelefone() {
+        this.isVisibleTelefone = true;
+    }
+
+    removerTelefone() {
+        this.isVisibleTelefone = true;
+    }
+
+    onRowSelectTelefone(event) {
+        this.telefoneSelecionado = event.data;
+    }
+
+    onRowUnselectTelefone(event) {
+        this.telefoneSelecionado = event.data;
     }
 
 
