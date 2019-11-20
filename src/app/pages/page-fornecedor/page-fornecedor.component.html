@@ -8,8 +8,7 @@
                             <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
                                 <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
                                     <div style="position: relative;top:10px;left: 10px !important;">
-                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa"
-                                            [value]="item.value" [label]="item.label"></p-radioButton>
+                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa" [value]="item.value" [label]="item.label"></p-radioButton>
                                     </div>
                                 </div>
                             </div>
@@ -21,54 +20,40 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                        <inputMask id="cnpjCpf" maxlength="19" md="12" class="abc"
-                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'"
-                            [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'"
-                            [(ngModel)]="objetoSelecionado.cnpjCpf"
+                        <inputMask id="cpfCnpj" maxlength="19" md="12" class="abc" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'" [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'" [(ngModel)]="objetoSelecionado.pessoa.cpfCnpj"
                             [placeholder]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '___.___.___-__': '__.___.___/____-__'">
                         </inputMask>
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="razaoSocial" maxlength="60" md="12"
-                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'"
-                            [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
+                        <inputText id="razaoSocial" maxlength="60" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'" [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia"
-                            [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
+                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                        <inputText id="ieRg" maxlength="12" md="12"
-                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
-                            [(ngModel)]="objetoSelecionado.pessoa.ieRg">
+                        <inputText id="ieRg" maxlength="12" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'" [(ngModel)]="objetoSelecionado.pessoa.ieRg">
                         </inputText>
                     </div>
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="email" md="12" label="Email" maxlength="100"
-                            [(ngModel)]="objetoSelecionado.email">
+                        <inputText id="email" md="12" label="Email" maxlength="100" [(ngModel)]="objetoSelecionado.email">
                         </inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" dataKey="id" selectionMode="single"
-                            [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="enderecoSelecionado" [responsive]="false"
-                            (onRowSelect)="onRowSelectEndereco($event)" (onRowUnselect)="onRowUnselectEndereco($event)">
+                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" dataKey="id" selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="enderecoSelecionado" [responsive]="false" (onRowSelect)="onRowSelectEndereco($event)"
+                            (onRowUnselect)="onRowUnselectEndereco($event)">
 
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
                                     <label style="float: left;" class="mt-2"><i class="fa fa-map-marker"></i> Endereço</label>
-                                    <button label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
-                                        pButton></button>
-                                    <button label="Editar" (click)="editarEndereco()" icon="fa fa-edit"
-                                        pButton></button>
-                                    <button label="Remover" (click)="removerEndereco()" icon="fa fa-trash"
-                                        pButton></button>
+                                    <button label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus" pButton></button>
+                                    <button label="Editar" (click)="editarEndereco()" icon="fa fa-edit" pButton></button>
+                                    <button label="Remover" (click)="removerEndereco()" icon="fa fa-trash" pButton></button>
                                 </div>
                             </ng-template>
 
@@ -101,21 +86,16 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listTelefone" dataKey="endereco.id"
-                            selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="filtroSelecionado" [responsive]="false" (onRowSelect)="onRowSelect($event)"
+                        <p-table [value]="objetoSelecionado.pessoa.listTelefone" dataKey="endereco.id" selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="filtroSelecionado" [responsive]="false" (onRowSelect)="onRowSelect($event)"
                             (onRowUnselect)="onRowUnselect($event)">
 
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
-                                        <label style="float: left;" class="mt-2"><i class="fa fa-phone-square"></i> Telefone</label>
-                                    <button label="Incluir" (click)="showDialogToAdd()" icon="fa fa-plus"
-                                        pButton></button>
-                                    <button label="Editar" (click)="listEndereco.acaoEdit()" icon="fa fa-edit"
-                                        pButton></button>
-                                    <button label="Remover" (click)="listEndereco.acaoDelete()" icon="fa fa-trash"
-                                        pButton></button>
+                                    <label style="float: left;" class="mt-2"><i class="fa fa-phone-square"></i> Telefone</label>
+                                    <button label="Incluir" (click)="showDialogToAdd()" icon="fa fa-plus" pButton></button>
+                                    <button label="Editar" (click)="listEndereco.acaoEdit()" icon="fa fa-edit" pButton></button>
+                                    <button label="Remover" (click)="listEndereco.acaoDelete()" icon="fa fa-trash" pButton></button>
                                 </div>
                             </ng-template>
 
@@ -128,9 +108,7 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item"
-                                    [title]="item.situacao=='I'?'Promoção Inativa':item.situacao=='A'?'Promoção Ativa':item.situacao=='P'?'Promoção Pendente':'Promoção Rejeitada'"
-                                    [ngClass]="item.situacao=='I'?'divergent':item.situacao=='A'?'corret':item.situacao=='P'?'incorret':null">
+                                <tr [pSelectableRow]="item" [title]="item.situacao=='I'?'Promoção Inativa':item.situacao=='A'?'Promoção Ativa':item.situacao=='P'?'Promoção Pendente':'Promoção Rejeitada'" [ngClass]="item.situacao=='I'?'divergent':item.situacao=='A'?'corret':item.situacao=='P'?'incorret':null">
 
                                     <td style="text-align: center;width: 70px !important;">{{item.codigo}}</td>
                                     <td style="text-align: center;width: 135px !important;">{{item.logradouro}}</td>
@@ -147,8 +125,7 @@
                     </div>
                 </div>
 
-                <p-dialog header="Endereço Fornecedor" [(visible)]="isVisibleEndereco" [modal]="true"
-                    [closeOnEscape]="true" [responsive]="true" [minY]="70" [maximizable]="false" [baseZIndex]="10000">
+                <p-dialog header="Endereço Fornecedor" [(visible)]="isVisibleEndereco" [modal]="true" [closeOnEscape]="true" [responsive]="true" [minY]="70" [maximizable]="false" [baseZIndex]="10000">
                     <div class="ui-g">
                         <div class="ui-g-12">
                             <div class="row">
@@ -157,22 +134,18 @@
                                         <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
                                             <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
                                                 <div style="position: relative;top:10px;left: 10px !important;">
-                                                    <p-radioButton name="endereco"
-                                                        [(ngModel)]="enderecoSelecionado.ativo" [value]="item.value"
-                                                        [label]="item.label"></p-radioButton>
+                                                    <p-radioButton name="endereco" [(ngModel)]="enderecoSelecionado.ativo" [value]="item.value" [label]="item.label"></p-radioButton>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
-                                    <inputText id="fantasia" maxlength="60" [disabled]="!enderecoSelecionado.ativo"
-                                        md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia">
+                                    <inputText id="fantasia" maxlength="60" [disabled]="!enderecoSelecionado.ativo" md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia">
                                     </inputText>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
-                                    <inputText id="fantasia" maxlength="60" md="12" label="Fantasia"
-                                        [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
+                                    <inputText id="fantasia" maxlength="60" md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
                                 </div>
                                 <p-footer><br>
                                     <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"></button>
