@@ -1,4 +1,4 @@
-import { CrudComponent } from 'padrao';
+import { CrudComponent, StringUtils } from 'padrao';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,14 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageFornecedorComponent extends CrudComponent {
 
+    listaEstado: any;
+    listaCidade: any;
+    cidade: any;
+
+
     isVisibleEndereco: boolean = false;
     isVisibleTelefone: boolean = false;
+    progressSpinner: boolean;
+    errocep: boolean;
 
     listaPessoas = [];
     statusEndereco = [];
 
     enderecoSelecionado: any = null;
     telefoneSelecionado: any = null;
+
 
 
     /*************************** init method ****************************/
@@ -32,6 +40,61 @@ export class PageFornecedorComponent extends CrudComponent {
             this.statusEndereco.push({ label: 'Inativo', value: false });
     }
 
+    carregarEstados() {
+        this.httpUtilService.get('/estados').subscribe(data => {
+            this.listaEstado = new Array();
+            this.listaEstado.push({ label: 'Selecione ...', value: null });
+            this.listaEstado = data.json();
+            this.carregarCidades();
+        });
+    }
+
+    carregarCidades() {
+        this.httpUtilService.get('/cidades/findByUf/' + this.enderecoSelecionado.estado.id).subscribe(data => {
+            this.listaCidade = data.json();
+        }, error => {
+            this.progressSpinner = false;
+        });
+    }
+
+    carregarEnderecoPeloCep() {
+        let endereco = undefined;
+        this.progressSpinner = true;
+        this.errocep = false;
+
+        if (StringUtils.isEmpty(this.enderecoSelecionado.cep)) {
+            this.enderecoSelecionado = new Object();
+            this.progressSpinner = false;
+            return;
+        }
+
+        this.httpUtilService.http.get('https://viacep.com.br/ws/' + StringUtils.extraiNumeros(this.enderecoSelecionado.cep) + '/json')
+            .subscribe(data => {
+                endereco = data.json();
+                if (endereco.ibge === undefined) {
+                    this.progressSpinner = false;
+                    this.errocep = true;
+                } else {
+                    this.enderecoSelecionado.logradouro = endereco.logradouro;
+                    this.enderecoSelecionado.complemento = endereco.complemento;
+                    this.enderecoSelecionado.bairro = endereco.bairro;
+                    this.errocep = false;
+
+                    this.httpUtilService.get('/cidades/' + endereco.ibge).subscribe(data => {
+                        const cidade = data.json();
+                        this.enderecoSelecionado.cidade = cidade;
+                        this.enderecoSelecionado.estado = cidade.cuF;
+                        this.carregarCidades();
+                        this.progressSpinner = false;
+                    });
+                }
+
+            }, error => {
+                this.progressSpinner = false;
+                this.errocep = true;
+            });
+    }
+
     /*************************** end method ****************************/
 
     instance() {
@@ -42,7 +105,6 @@ export class PageFornecedorComponent extends CrudComponent {
         this.objetoSelecionado.pessoa.listTelefone = new Array();
         this.enderecoSelecionado = new Object();
     }
-
 
     ngOnInit() {
 
@@ -60,6 +122,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
         this.loadPessoas();
         this.loadStatusEndereco();
+        this.carregarEstados();
 
     }
 
@@ -92,7 +155,6 @@ export class PageFornecedorComponent extends CrudComponent {
     onRowUnselectEndereco(event) {
         this.enderecoSelecionado = event.data;
     }
-
 
     /****************** Dialog Telefone *********************/
 

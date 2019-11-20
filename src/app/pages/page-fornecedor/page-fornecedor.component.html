@@ -62,7 +62,8 @@
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
-                                    <label style="float: left;" class="mt-2"><i class="fa fa-map-marker"></i> Endereço</label>
+                                    <label style="float: left;" class="mt-2"><i class="fa fa-map-marker"></i>
+                                        Endereço</label>
                                     <button label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
                                         pButton></button>
                                     <button label="Editar" (click)="editarEndereco()" icon="fa fa-edit"
@@ -109,7 +110,8 @@
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
-                                        <label style="float: left;" class="mt-2"><i class="fa fa-phone-square"></i> Telefone</label>
+                                    <label style="float: left;" class="mt-2"><i class="fa fa-phone-square"></i>
+                                        Telefone</label>
                                     <button label="Incluir" (click)="showDialogToAdd()" icon="fa fa-plus"
                                         pButton></button>
                                     <button label="Editar" (click)="listEndereco.acaoEdit()" icon="fa fa-edit"
@@ -148,8 +150,9 @@
                 </div>
 
                 <p-dialog header="Endereço Fornecedor" [(visible)]="isVisibleEndereco" [modal]="true"
-                    [closeOnEscape]="true" [responsive]="true" [minY]="70" [maximizable]="false" [baseZIndex]="10000">
-                    <div class="ui-g">
+                    [closeOnEscape]="true" [style]="{'width': '70%'}" [responsive]="true" [minY]="70"
+                    [maximizable]="false" [baseZIndex]="10000">
+                    <div class="ui-g" style="height: 420px;">
                         <div class="ui-g-12">
                             <div class="row">
                                 <div class="ui-g-12">
@@ -165,32 +168,71 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ui-g-12 ui-md-6">
-                                    <inputText id="fantasia" maxlength="60" [disabled]="!enderecoSelecionado.ativo"
-                                        md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia">
+
+                                <div class="ui-g-12 ui-md-12">
+                                    <inputMask id="cep" placeholder="_____-___" mask="99999-999" md="12" label="CEP"
+                                        [disabled]="!enderecoSelecionado.ativo" autocomplete="off"
+                                        [(ngModel)]="enderecoSelecionado.cep" (onChange)="carregarEnderecoPeloCep()">
+                                    </inputMask>
+                                    <p-progressSpinner *ngIf="progressSpinner" [style]="{width: '50px', height: '25px'}"
+                                        strokeWidth="5" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+                                    <p-message class="col-md-3 mb-1" *ngIf="errocep && enderecoSelecionado.cep != '' "
+                                        severity="error" text="CEP invalido"
+                                        [style]="{width: '50px', height: '50px', top: '50px' }">
+                                    </p-message>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-4 ui-lg-3">
+                                    <label>Estado</label><br>
+                                    <p-dropdown id="estado" autocomplete="off" [options]="listaEstado"
+                                        [disabled]="!enderecoSelecionado.ativo" (onChange)="carregarCidades()"
+                                        [filter]="true" [(ngModel)]="enderecoSelecionado.estado" optionLabel="uf"
+                                        [style]="{'border':'1px solid #00B5B8', 'width': '100%' }">
+                                    </p-dropdown>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-4 ui-lg-3">
+                                    <label>Cidade</label>
+                                    <p-dropdown id="cidade" autocomplete="off" [options]="listaCidade" [filter]="true"
+                                        [disabled]="!enderecoSelecionado.ativo" [(ngModel)]="enderecoSelecionado.cidade"
+                                        optionLabel="xmun" [style]="{'border':'1px solid #00B5B8', 'width': '100%' }">
+                                    </p-dropdown>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-4 ui-lg-10" style="margin-top: -2px;">
+                                    <inputText id="logradouro" autocomplete="off" md="12" maxlength="80"
+                                        [disabled]="!enderecoSelecionado.ativo"
+                                        [(ngModel)]="enderecoSelecionado.logradouro" maxlength="15" label="logradoura">
                                     </inputText>
                                 </div>
-                                <div class="ui-g-12 ui-md-6">
-                                    <inputText id="fantasia" maxlength="60" md="12" label="Fantasia"
-                                        [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
-                                </div>
-                                <p-footer><br>
-                                    <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"></button>
-                                    <button pButton icon="fa fa-times" label="Cancelar"></button>
-                                </p-footer>
+                                <inputText id="numero" md="2" autocomplete="off" label="Numero"
+                                    [disabled]="!enderecoSelecionado.ativo" [(ngModel)]="enderecoSelecionado.numero">
+                                </inputText>
+                                <inputText id="complemento" autocomplete="off" md="10" maxlength="60" label="Complemento"
+                                [disabled]="!enderecoSelecionado.ativo"
+                                [(ngModel)]="enderecoSelecionado.complemento">
+                            </inputText>
+                                <inputText id="bairro" autocomplete="off" md="2" maxlength="50" label="Bairro"
+                                    [disabled]="!enderecoSelecionado.ativo" [(ngModel)]="enderecoSelecionado.bairro">
+                                </inputText>
+
+
 
 
                             </div>
-
                         </div>
                     </div>
+                    <p-footer>
+                        <div class="row">
+                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"
+                                [disabled]="!enderecoSelecionado.ativo"></button>
+                            <button pButton icon="fa fa-times" label="Cancelar"></button>
+                        </div>
 
-
+                    </p-footer>
                 </p-dialog>
-
             </div>
         </div>
-
 
     </div>
 

@@ -86,6 +86,7 @@ import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PagePedidosComponent } from './pages/page-pedidos/page.pedidos.component';
 import { RaizComponent } from './raiz/raiz.component';
 import { PageDepartamentoComponent } from './pages/page-departamento/page-departamento.component';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 
@@ -155,6 +156,7 @@ registerLocaleData(ptBr)
         SliderModule,
         SpinnerModule,
         SplitButtonModule,
+        ProgressSpinnerModule,
         StepsModule,
         TableModule,
         TabMenuModule,
