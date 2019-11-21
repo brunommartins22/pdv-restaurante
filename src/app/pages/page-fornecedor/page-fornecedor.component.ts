@@ -19,31 +19,36 @@ export class PageFornecedorComponent extends CrudComponent {
     errocep: boolean;
 
     listaPessoas = [];
+    listaTelefone = [];
+    listaOperadora = [];
     statusEndereco = [];
+    statusTelefone = [];
 
     enderecoSelecionado: any = null;
     telefoneSelecionado: any = null;
+    
 
 
 
-    /*************************** init method ****************************/
+    /*************************** init method adress ****************************/
 
     private loadPessoas() {
         this.listaPessoas = new Array();
         this.listaPessoas.push({ label: 'Pessoa Fisica', value: 'FISICA' }),
-            this.listaPessoas.push({ label: 'Pessoa Juridica', value: 'JURIDICA' });
+        this.listaPessoas.push({ label: 'Pessoa Juridica', value: 'JURIDICA' });
     }
 
     private loadStatusEndereco() {
         this.statusEndereco = new Array();
         this.statusEndereco.push({ label: 'Ativo', value: true }),
-            this.statusEndereco.push({ label: 'Inativo', value: false });
+        this.statusEndereco.push({ label: 'Inativo', value: false });
     }
 
+   
     carregarEstados() {
         this.httpUtilService.get('/estados').subscribe(data => {
             this.listaEstado = new Array();
-            this.listaEstado.push({ label: 'Selecione ...', value: null });
+            // this.listaEstado.push({ label: 'Selecione ...', value: '' });
             this.listaEstado = data.json();
             this.carregarCidades();
         });
@@ -95,15 +100,57 @@ export class PageFornecedorComponent extends CrudComponent {
             });
     }
 
-    /*************************** end method ****************************/
+    /*************************** end method adress ****************************/
+
+    
+    
+    /*************************** init method fone ****************************/
+
+
+    private loadStatusTelefone() {
+        this.statusTelefone = new Array();
+        this.statusTelefone.push({ label: 'Ativo', value: true }),
+        this.statusTelefone.push({ label: 'Inativo', value: false });
+    }
+
+    loadTiposTelefone() {
+        this.listaTelefone = new Array();
+        this.listaTelefone.push({ label: 'Selecione...', value: '' }),
+        this.listaTelefone.push({ label: '1 - Celular', value: '1' }),
+        this.listaTelefone.push({ label: '2 - Telefone Fixo', value: '2' });
+        
+    }
+
+    loadOperadoras() {
+        this.listaOperadora = new Array();
+        this.listaOperadora.push({ label: 'Selecione...', value: '' }),
+        this.listaOperadora.push({ label: '1-Oi', value: '1' }),
+        this.listaOperadora.push({ label: '2-Tim', value: '2' });
+        this.listaOperadora.push({ label: '3-Vivo', value: '3' }),
+        this.listaOperadora.push({ label: '4-Claro', value: '4' });
+    }
+
+
+
+    /*************************** end method fone ****************************/
+
 
     instance() {
         this.objetoSelecionado = new Object();
         this.objetoSelecionado.pessoa = new Object();
         this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
+        // this.objetoSelecionado.pessoa.nomePessoa = nomePessoa;
+        // this.objetoSelecionado.pessoa.nomeFantasia = new Object();
+        // this.objetoSelecionado.pessoa.ieRg = new Object();
+        // this.objetoSelecionado.pessoa.cnpjCpf = new Object();
+
         this.objetoSelecionado.pessoa.listEndereco = new Array();
         this.objetoSelecionado.pessoa.listTelefone = new Array();
+        this.objetoSelecionado.pessoa.listaOperadora = new Array();
         this.enderecoSelecionado = new Object();
+        this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.nmOperadora = new Object();
+        
     }
 
     ngOnInit() {
@@ -123,15 +170,15 @@ export class PageFornecedorComponent extends CrudComponent {
         this.loadPessoas();
         this.loadStatusEndereco();
         this.carregarEstados();
+        this.loadStatusTelefone();
+        this.loadTiposTelefone();
+        this.loadOperadoras();
 
     }
 
-    acaoAdd() {
-        this.renderizarListagem = false;
-
-    }
-
+    
     /****************** Dialog Endereco *********************/
+
 
     adicionarEndereco() {
         this.enderecoSelecionado = new Object();
@@ -160,6 +207,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
     adicionarTelefone() {
         this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.ativo = true;
         this.isVisibleTelefone = true;
     }
 
