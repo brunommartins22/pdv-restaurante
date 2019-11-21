@@ -19,14 +19,18 @@ export class PageFornecedorComponent extends CrudComponent {
     errocep: boolean;
 
     listaPessoas = [];
+    listaTelefone = [];
+    listaOperadora = [];
     statusEndereco = [];
+    statusTelefone = [];
 
     enderecoSelecionado: any = null;
     telefoneSelecionado: any = null;
 
 
 
-    /*************************** init method ****************************/
+
+    /*************************** init method address ****************************/
 
     private loadPessoas() {
         this.listaPessoas = new Array();
@@ -40,10 +44,11 @@ export class PageFornecedorComponent extends CrudComponent {
             this.statusEndereco.push({ label: 'Inativo', value: false });
     }
 
+
     carregarEstados() {
         this.httpUtilService.get('/estados').subscribe(data => {
             this.listaEstado = new Array();
-            this.listaEstado.push({ label: 'Selecione ...', value: null });
+            // this.listaEstado.push({ label: 'Selecione ...', value: '' });
             this.listaEstado = data.json();
             this.carregarCidades();
         });
@@ -95,56 +100,143 @@ export class PageFornecedorComponent extends CrudComponent {
             });
     }
 
-    /*************************** end method ****************************/
+    /*************************** end method address ****************************/
+
+
+
+    /*************************** init method fone ****************************/
+
+
+    private loadStatusTelefone() {
+        this.statusTelefone = new Array();
+        this.statusTelefone.push({ label: 'Ativo', value: true }),
+            this.statusTelefone.push({ label: 'Inativo', value: false });
+    }
+
+    loadTiposTelefone() {
+        this.listaTelefone = new Array();
+        this.listaTelefone.push({ label: 'Selecione...', value: '' }),
+            this.listaTelefone.push({ label: '1 - Celular', value: '1' }),
+            this.listaTelefone.push({ label: '2 - Telefone Fixo', value: '2' });
+
+    }
+
+    loadOperadoras() {
+        this.listaOperadora = new Array();
+        this.listaOperadora.push({ label: 'Selecione...', value: '' }),
+            this.listaOperadora.push({ label: '1-Oi', value: '1' }),
+            this.listaOperadora.push({ label: '2-Tim', value: '2' });
+        this.listaOperadora.push({ label: '3-Vivo', value: '3' }),
+            this.listaOperadora.push({ label: '4-Claro', value: '4' });
+    }
+
+
+
+    /*************************** end method fone ****************************/
+
 
     instance() {
         this.objetoSelecionado = new Object();
         this.objetoSelecionado.pessoa = new Object();
         this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
-        this.objetoSelecionado.pessoa.listEndereco = new Array();
-        this.objetoSelecionado.pessoa.listTelefone = new Array();
+        this.objetoSelecionado.pessoa.listEndereco = [];
+        this.objetoSelecionado.pessoa.listTelefone = [];
+        this.objetoSelecionado.pessoa.listaOperadora = [];
         this.enderecoSelecionado = new Object();
+        this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.nmOperadora = new Object();
+
     }
 
     ngOnInit() {
 
         document.body.classList.remove('body-img');
 
+
         super.iniciar('/fornecedores');
 
+        this.campoSelecionadoOrdenacao = 'id';
+        this.camposOrdenacao.push({ label: 'Código', value: 'id' });
+        this.camposOrdenacao.push({ label: 'Razão Social', value: 'pessoa.nomePessoa' });
+        this.camposOrdenacao.push({ label: 'Nome Fantasia', value: 'pessoa.nomeFantasia' });
+
         this.cols = [
-            { field: 'nomePessoa', header: 'Razão Social', width: '70px' },
-            { field: 'nomeFantasia', header: 'Logradouro', width: '70px' },
-            { field: 'cnpjCpf', header: 'CNPJ / CPF', width: '30px' },
-            { field: 'ieRg', header: 'IE / RG', width: '20px' },
-            { field: 'email', header: 'Email', width: '30px' },
+            { field: 'id', header: 'ID', width: '10px' },
+            { field: 'pessoa', subfield: 'nomePessoa', header: 'Razão Social', width: '70px' },
+            { field: 'pessoa', subfield: 'nomeFantasia', header: 'Nome Fantasia', width: '70px' },
+            { field: 'pessoa', subfield: 'cpfCnpj', header: 'CNPJ / CPF', width: '30px' },
+            { field: 'pessoa', subfield: 'ieRg', header: 'IE / RG', width: '20px' },
+            { field: 'pessoa', subfield: 'email', header: 'Email', width: '30px' },
         ];
+
 
         this.loadPessoas();
         this.loadStatusEndereco();
         this.carregarEstados();
+        this.loadStatusTelefone();
+        this.loadTiposTelefone();
+        this.loadOperadoras();
 
     }
 
-    acaoAdd() {
-        this.renderizarListagem = false;
-
-    }
 
     /****************** Dialog Endereco *********************/
 
+
     adicionarEndereco() {
+
         this.enderecoSelecionado = new Object();
+        this.enderecoSelecionado.estado = this.listaEstado[0];
+        this.carregarCidades();
         this.enderecoSelecionado.ativo = true;
         this.isVisibleEndereco = true;
     }
 
     editarEndereco() {
-        this.isVisibleEndereco = true;
+        if (this.enderecoSelecionado.id != null
+            && this.enderecoSelecionado.id !== undefined) {
+            this.carregarCidades();
+            this.isVisibleEndereco = true;
+        } else {
+            this.showWarn('Selecione um Endereço!');
+        }
+
     }
 
     removerEndereco() {
-        this.isVisibleEndereco = true;
+
+        if (this.enderecoSelecionado.id != null && this.enderecoSelecionado.id !== undefined) {
+            this.confirmationService.confirm({
+                message: 'Confirma a remoção do Endereço ?',
+                accept: () => {
+                    this.objetoSelecionado.pessoa.listEndereco =  this.objetoSelecionado.pessoa.listEndereco.filter(element =>
+                        element.id != this.enderecoSelecionado.id
+                    );
+                },
+                reject: () => {
+                    return;
+                }
+            });
+
+        } else {
+            this.showWarn('Selecione um Endereço!');
+        }
+
+    }
+
+    salvarEndereco() {
+        if (this.enderecoSelecionado.id != null && this.enderecoSelecionado.id != undefined) {
+            this.objetoSelecionado.pessoa.listEndereco.forEach(element => {
+                if (element.id == this.enderecoSelecionado.id) {
+                    element = this.enderecoSelecionado;
+                }
+            });
+        } else {
+            this.objetoSelecionado.pessoa.listEndereco.push(this.enderecoSelecionado);
+            this.enderecoSelecionado = new Object();
+        }
+
+        this.isVisibleEndereco = false;
     }
 
 
@@ -160,6 +252,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
     adicionarTelefone() {
         this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.ativo = true;
         this.isVisibleTelefone = true;
     }
 
