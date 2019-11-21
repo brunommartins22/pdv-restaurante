@@ -21,10 +21,10 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                        <inputMask id="cnpjCpf" maxlength="19" md="12" class="abc"
+                        <inputMask id="cpfCnpj" maxlength="19" md="12" class="abc"
                             [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'"
                             [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'"
-                            [(ngModel)]="objetoSelecionado.pessoa.cnpjCpf"
+                            [(ngModel)]="objetoSelecionado.pessoa.cpfCnpj"
                             [placeholder]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '___.___.___-__': '__.___.___/____-__'">
                         </inputMask>
                     </div>
@@ -105,8 +105,8 @@
 
                         <p-table [value]="objetoSelecionado.pessoa.listTelefone" dataKey="endereco.id"
                             selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="filtroSelecionado" [responsive]="false" (onRowSelect)="onRowSelect($event)"
-                            (onRowUnselect)="onRowUnselect($event)">
+                            [(selection)]="telefoneSelecionado" [responsive]="false" (onRowSelect)="onRowSelectTelefone($event)"
+                            (onRowUnselect)="onRowUnselectTelefone($event)">
 
                             <ng-template pTemplate="caption">
 
@@ -214,7 +214,7 @@
                     </div>
                     <p-footer>
                         <div class="row">
-                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"
+                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar" (click)="salvarEndereco()"
                                 [disabled]="!enderecoSelecionado.ativo"></button>
                             <button pButton icon="fa fa-times" label="Cancelar"></button>
                         </div>
@@ -225,7 +225,7 @@
                 <p-dialog header="Telefone Fornecedor" [(visible)]="isVisibleTelefone" [modal]="true"
                     [closeOnEscape]="true" [style]="{'width': '20%'}" [responsive]="true" [minY]="70"
                     [maximizable]="false" [baseZIndex]="10000">
-                    <div class="ui-g" style="height: 420px;">
+                    <div class="ui-g" style="height: 360px;">
                         <div class="ui-g-12">
                             <div class="row">
                                 <div class="ui-g-12">
@@ -252,13 +252,13 @@
                                         </p-dropdown>
                                     </div>
                                 </div>
-                                
+
                                 <div class="ui-g-12 ui-md-2" style="position: relative;top: 2px;"
                                     *ngIf="telefoneSelecionado.tipo == '1'" >
                                     <label>Operadora</label><br>
                                     <p-dropdown id="operadora" autoWidth="false" [filter]="true"
                                         [options]="listaOperadora" [(ngModel)]="telefoneSelecionado.nmOperadora"
-                                        (onChange)='loadOperadoras()' 
+                                        (onChange)='loadOperadoras()'
                                         [disabled]="!telefoneSelecionado.ativo">
                                     </p-dropdown>
 
@@ -272,11 +272,11 @@
                                         [disabled]="!telefoneSelecionado.ativo"></inputMask>
 
                                 </div>
-                                
+
                                 <!-- <div class="ui-g-12">
                                     <inputMask id="fone2" autocomplete="off" placeholder="(___) _ ____-____" md="3" label="Fone 02"
                                         [(ngModel)]="telefoneSelecionado.Numero"
-                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999': '(999) 9999-9999'"></inputMask>                                
+                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999': '(999) 9999-9999'"></inputMask>
                                 </div> -->
 
                             </div>
@@ -293,7 +293,7 @@
                 </p-dialog>
             </div>
         </div>
-
+        {{objetoSelecionado | json}}
     </div>
 
 </crud>
