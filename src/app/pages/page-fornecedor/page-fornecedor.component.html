@@ -1,4 +1,4 @@
-<crud [componente]="this" [permissao]="" titulo="Fornecedor">
+<crud [componente]="this" [permissao]="1.06" titulo="Fornecedor">
     <div detalhes>
         <div class="ui-g">
             <div class="ui-g-12">
@@ -8,8 +8,7 @@
                             <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
                                 <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
                                     <div style="position: relative;top:10px;left: 10px !important;">
-                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa"
-                                            [value]="item.value" [label]="item.label"></p-radioButton>
+                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa" [value]="item.value" [label]="item.label"></p-radioButton>
                                     </div>
                                 </div>
                             </div>
@@ -30,20 +29,15 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="razaoSocial" maxlength="60" md="12"
-                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'"
-                            [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
+                        <inputText id="razaoSocial" maxlength="60" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'" [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia"
-                            [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
+                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                        <inputText id="ieRg" maxlength="12" md="12"
-                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
-                            [(ngModel)]="objetoSelecionado.pessoa.ieRg">
+                        <inputText id="ieRg" maxlength="12" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'" [(ngModel)]="objetoSelecionado.pessoa.ieRg">
                         </inputText>
                     </div>
 
@@ -55,10 +49,8 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" dataKey="id" selectionMode="single"
-                            [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="enderecoSelecionado" [responsive]="false"
-                            (onRowSelect)="onRowSelectEndereco($event)" (onRowUnselect)="onRowUnselectEndereco($event)">
+                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" dataKey="id" selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="enderecoSelecionado" [responsive]="false" (onRowSelect)="onRowSelectEndereco($event)"
+                            (onRowUnselect)="onRowUnselectEndereco($event)">
 
                             <ng-template pTemplate="caption">
 
@@ -153,9 +145,7 @@
                                         <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
                                             <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
                                                 <div style="position: relative;top:10px;left: 10px !important;">
-                                                    <p-radioButton name="endereco"
-                                                        [(ngModel)]="enderecoSelecionado.ativo" [value]="item.value"
-                                                        [label]="item.label"></p-radioButton>
+                                                    <p-radioButton name="endereco" [(ngModel)]="enderecoSelecionado.ativo" [value]="item.value" [label]="item.label"></p-radioButton>
                                                 </div>
                                             </div>
                                         </div>
