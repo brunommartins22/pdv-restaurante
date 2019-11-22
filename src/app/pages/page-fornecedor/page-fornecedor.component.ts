@@ -13,6 +13,7 @@ export class PageFornecedorComponent extends CrudComponent {
     cidade: any;
 
 
+
     isVisibleEndereco: boolean = false;
     isVisibleTelefone: boolean = false;
     progressSpinner: boolean;
@@ -24,8 +25,14 @@ export class PageFornecedorComponent extends CrudComponent {
     statusEndereco = [];
     statusTelefone = [];
 
-    enderecoSelecionado: any = null;
-    telefoneSelecionado: any = null;
+    enderecoSelecionado: any = new Object();
+    enderecoTabela: any;
+    indexEndereco: any = null;
+    telefoneSelecionado: any = new Object();
+    telefoneTabela: any;
+    indexTelefone: any = null;
+
+
 
 
 
@@ -50,6 +57,7 @@ export class PageFornecedorComponent extends CrudComponent {
             this.listaEstado = new Array();
             // this.listaEstado.push({ label: 'Selecione ...', value: '' });
             this.listaEstado = data.json();
+            this.enderecoSelecionado.estado = this.listaEstado[0];
             this.carregarCidades();
         });
     }
@@ -179,6 +187,18 @@ export class PageFornecedorComponent extends CrudComponent {
 
     }
 
+    validar() {
+        if (this.objetoSelecionado.pessoa.cpfCnpj == null ||
+            this.objetoSelecionado.pessoa.cpfCnpj === undefined ||
+            this.objetoSelecionado.pessoa.cpfCnpj === '') {
+            this.showError('Valor do Departamento não informado ou invalido!');
+            this.setarFocus('nomeDepartamento');
+            return false;
+        }
+
+        return true;
+    }
+
 
     /****************** Dialog Endereco *********************/
 
@@ -190,11 +210,14 @@ export class PageFornecedorComponent extends CrudComponent {
         this.carregarCidades();
         this.enderecoSelecionado.ativo = true;
         this.isVisibleEndereco = true;
+        this.indexEndereco = null;
+        this.enderecoTabela = null;
+
     }
 
     editarEndereco() {
-        if (this.enderecoSelecionado.id != null
-            && this.enderecoSelecionado.id !== undefined) {
+        if (this.enderecoSelecionado.logradouro != null
+            && this.enderecoSelecionado.logradouro !== undefined) {
             this.carregarCidades();
             this.isVisibleEndereco = true;
         } else {
@@ -205,13 +228,11 @@ export class PageFornecedorComponent extends CrudComponent {
 
     removerEndereco() {
 
-        if (this.enderecoSelecionado.id != null && this.enderecoSelecionado.id !== undefined) {
+        if (this.indexEndereco != null && this.indexEndereco != undefined) {
             this.confirmationService.confirm({
                 message: 'Confirma a remoção do Endereço ?',
                 accept: () => {
-                    this.objetoSelecionado.pessoa.listEndereco =  this.objetoSelecionado.pessoa.listEndereco.filter(element =>
-                        element.id != this.enderecoSelecionado.id
-                    );
+                    this.objetoSelecionado.pessoa.listEndereco.splice(this.indexEndereco, 1);
                 },
                 reject: () => {
                     return;
@@ -225,12 +246,15 @@ export class PageFornecedorComponent extends CrudComponent {
     }
 
     salvarEndereco() {
-        if (this.enderecoSelecionado.id != null && this.enderecoSelecionado.id != undefined) {
-            this.objetoSelecionado.pessoa.listEndereco.forEach(element => {
-                if (element.id == this.enderecoSelecionado.id) {
-                    element = this.enderecoSelecionado;
-                }
-            });
+        if (this.indexEndereco != null && this.indexEndereco != undefined) {
+            // this.objetoSelecionado.pessoa.listEndereco.forEach(element => {
+            //     if (element.id == this.enderecoSelecionado.id) {
+            //         element = this.enderecoSelecionado;
+            //     }
+            // });
+            this.objetoSelecionado.pessoa.listEndereco[this.indexEndereco] = this.enderecoSelecionado;
+            this.enderecoTabela = this.enderecoSelecionado;
+
         } else {
             this.objetoSelecionado.pessoa.listEndereco.push(this.enderecoSelecionado);
             this.enderecoSelecionado = new Object();
@@ -241,11 +265,16 @@ export class PageFornecedorComponent extends CrudComponent {
 
 
     onRowSelectEndereco(event) {
+        this.indexEndereco = event.index;
         this.enderecoSelecionado = event.data;
+        // console.log(this.indexEndereco);
+        // console.log(event.index);
+        // console.log(JSON.stringify(event));
     }
 
     onRowUnselectEndereco(event) {
-        this.enderecoSelecionado = event.data;
+
+        this.indexEndereco = null;
     }
 
     /****************** Dialog Telefone *********************/

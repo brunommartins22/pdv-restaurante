@@ -8,7 +8,8 @@
                             <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
                                 <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
                                     <div style="position: relative;top:10px;left: 10px !important;">
-                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa" [value]="item.value" [label]="item.label"></p-radioButton>
+                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa"
+                                        [value]="item.value" [label]="item.label"></p-radioButton>
                                     </div>
                                 </div>
                             </div>
@@ -49,15 +50,18 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" dataKey="id" selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="enderecoSelecionado" [responsive]="false" (onRowSelect)="onRowSelectEndereco($event)"
-                            (onRowUnselect)="onRowUnselectEndereco($event)">
+                        <p-table [value]="objetoSelecionado.pessoa.listEndereco"  selectionMode="single"
+                        [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="enderecoTabela"
+                        [responsive]="false"
+                        (onRowSelect)="onRowSelectEndereco($event)"
+                        (onRowUnselect)="onRowUnselectEndereco($event)">
 
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
                                     <label style="float: left;" class="mt-2"><i class="fa fa-map-marker"></i>
                                         Endereço</label>
-                                    <button label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
+                                    <button  label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
                                         pButton></button>
                                     <button label="Editar" (click)="editarEndereco()" icon="fa fa-edit"
                                         pButton></button>
@@ -68,26 +72,26 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th style="text-align: center;width: 80px !important;">Código</th>
+                                    <!-- <th style="text-align: center;width: 70px !important;">Código</th> -->
+                                    <th style="text-align: center;width: 85px !important;">cep</th>
                                     <th style="text-align: justify;width: 200px !important;">Logradouro</th>
-                                    <th style="text-align: center;width: 80px !important;">cep</th>
-                                    <th style="text-align: center;width: 100px !important;">bairro</th>
+                                    <th style="text-align: center;width: 90px !important;">bairro</th>
                                     <th style="text-align: justify;width: 200px !important;">complemento</th>
-                                    <th style="text-align: center;width: 80px !important;">numero</th>
+                                    <th style="text-align: center;width: 75px !important;">numero</th>
                                     <th style="text-align: center;width: 100px !important;">cidade</th>
                                     <th style="text-align: center;width: 80px !important;">estado</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td style="text-align: center;width: 80px !important;">{{item.id}}</td>
+                            <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                                <tr [pSelectableRow]="item" [pSelectableRowIndex]="rowIndex">
+                                    <!-- <td style="text-align: center;width: 70px !important;">{{item.id}}</td> -->
+                                    <td style="text-align: center;width: 85px !important;">{{item.cep}}</td>
                                     <td style="text-align: justify;width: 200px !important;">{{item.logradouro}}</td>
-                                    <td style="text-align: center;width: 80px !important;">{{item.cep}}</td>
-                                    <td style="text-align: center;width: 100px !important;">{{item.bairro}}</td>
+                                    <td style="text-align: center;width: 90px !important;">{{item.bairro}}</td>
                                     <td style="text-align: justify;width: 200px !important;">{{item.complemento}}</td>
-                                    <td style="text-align: center;width: 20px !important;">{{item.numero}}</td>
+                                    <td style="text-align: center;width: 75px !important;">{{item.numero}}</td>
                                     <td style="text-align: center;width: 100px !important;">{{item.cidade.xmun}}</td>
-                                    <td style="text-align: center;width: 100px !important;">{{item.estado.uf}}</td>
+                                    <td style="text-align: center;width: 80px !important;">{{item.estado.uf}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -105,6 +109,7 @@
                                 <div style="position: relative;top: -5px;">
                                     <label style="float: left;" class="mt-2"><i class="fa fa-phone-square"></i>
                                         Telefone</label>
+
                                     <button label="Incluir" (click)="adicionarTelefone()" icon="fa fa-plus"
                                         pButton></button>
                                     <button label="Editar" (click)="editarTelefone()" icon="fa fa-edit"
@@ -116,7 +121,7 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th style="text-align: center;width: 30px !important;">Código</th>
+                                    <!-- <th style="text-align: center;width: 30px !important;">Código</th> -->
                                     <th style="text-align: center;width: 45px !important;">Tipo</th>
                                     <th style="text-align: center;width: 10px !important;">Operadora</th>
                                     <th style="text-align: center;width: 30px !important;">Número</th>
@@ -124,7 +129,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-item>
                                 <tr [pSelectableRow]="item">
-                                    <td style="text-align: center;width: 70px !important;">{{item.id}}</td>
+                                    <!-- <td style="text-align: center;width: 70px !important;">{{item.id}}</td> -->
                                     <td style="text-align: center;width: 135px !important;">{{item.tipo}}</td>
                                     <td style="text-align: center;width: 80px !important;">{{item.nmOperadora}}</td>
                                     <td style="text-align: justify;width: 240px !important;">{{item.numero}}</td>
@@ -203,7 +208,7 @@
                         </div>
                     </div>
                     <p-footer>
-                        <div class="row">
+                        <div class="row" >
                             <button class="mr-1" pButton icon="fa fa-check" label="Confirmar" (click)="salvarEndereco()"
                                 [disabled]="!enderecoSelecionado.ativo"></button>
                             <button pButton icon="fa fa-times" label="Cancelar"></button>
@@ -283,7 +288,7 @@
                 </p-dialog>
             </div>
         </div>
-        {{objetoSelecionado | json}}
+        {{indexEndereco | json}}
     </div>
 
 </crud>
