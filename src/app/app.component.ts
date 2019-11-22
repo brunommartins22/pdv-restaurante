@@ -41,6 +41,10 @@ export class AppComponent {
 
     rightPanelClick: boolean;
 
+    constructor(){
+        document.body.classList.remove('body-img');
+    }
+
     onLayoutClick() {
 
 

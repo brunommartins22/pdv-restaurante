@@ -150,7 +150,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
     ngOnInit() {
 
-        document.body.classList.remove('body-img');
+        // document.body.classList.remove('body-img');
 
 
         super.iniciar('/fornecedores');

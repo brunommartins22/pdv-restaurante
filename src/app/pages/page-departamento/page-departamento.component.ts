@@ -16,7 +16,7 @@ export class PageDepartamentoComponent extends CrudComponent {
         this.camposOrdenacao.push({ label: 'Departamento', value: 'nomeDepartamento' });
         this.camposOrdenacao.push({ label: 'Seção', value: 'secao.nmSecao' });
 
-        document.body.classList.remove('body-img');
+        // document.body.classList.remove('body-img');
 
         super.iniciar('/departamentos');
 

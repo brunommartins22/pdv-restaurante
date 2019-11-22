@@ -78,7 +78,7 @@ export class PagePedidosComponent extends ProcessoRestauranteComponent {
     ngOnInit() {
         this.tituloPedidos = "PDV - Restaurante";
         this.urlControler = "/pedidos";
-        document.body.classList.remove("body-img")
+        // document.body.classList.remove("body-img")
         this.carregarList();
 
     }
