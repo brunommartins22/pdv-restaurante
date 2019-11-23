@@ -243,7 +243,7 @@
                                         <label>Tipo</label><br>
                                         <p-dropdown id="tipoTelefone" md="6" autoWidth="false" [filter]="true"
                                             [options]="listaTelefone" [(ngModel)]="telefoneSelecionado.tipo"
-                                            [disabled]="!telefoneSelecionado.ativo">
+                                            [disabled]="!telefoneSelecionado.ativo" [style]="{'width':'100%'}">
                                         </p-dropdown>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
                                     <label>Operadora</label><br>
                                     <p-dropdown id="operadora" autoWidth="false" [filter]="true"
                                         [options]="listaOperadora" [(ngModel)]="telefoneSelecionado.nmOperadora"
-                                        (onChange)='loadOperadoras()'
+                                        (onChange)='loadOperadoras()' [style]="{'width':'100%'}"
                                         [disabled]="!telefoneSelecionado.ativo">
                                     </p-dropdown>
 

@@ -45,6 +45,9 @@ export class AppComponent {
         document.body.classList.remove('body-img');
     }
 
+
+    
+
     onLayoutClick() {
 
 
