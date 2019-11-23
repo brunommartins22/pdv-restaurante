@@ -32,7 +32,6 @@
         "jquery": "^3.4.1",
         "ng2-cookies": "^1.0.12",
         "ng2-currency-mask": "^5.3.1",
-        "padrao": "^0.1.21",
         "pdfobject": "^2.1.1",
         "primeicons": "1.0.0",
         "primeng": "8.0.1",
@@ -45,13 +44,14 @@
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "0.800.2",
-        "@angular/compiler-cli": "8.1.1",
         "@angular/cli": "8.1.1",
+        "@angular/compiler-cli": "8.1.1",
         "@angular/language-service": "8.1.1",
-        "@types/node": "8.9.5",
         "@types/jasmine": "3.3.13",
         "@types/jasminewd2": "2.0.3",
+        "@types/node": "8.9.5",
         "codelyzer": "5.1.0",
+        "file-saver": "^2.0.2",
         "jasmine-core": "3.4.0",
         "jasmine-spec-reporter": "4.2.1",
         "karma": "4.1.0",
@@ -59,11 +59,11 @@
         "karma-coverage-istanbul-reporter": "2.0.5",
         "karma-jasmine": "2.0.1",
         "karma-jasmine-html-reporter": "1.4.2",
+        "ng2-currency-mask": "^5.3.1",
+        "padrao": "^0.1.21",
         "protractor": "5.4.2",
         "ts-node": "7.0.1",
         "tslint": "5.17.0",
-        "typescript": "3.4.5",
-        "file-saver": "^2.0.2",
-        "ng2-currency-mask": "^5.3.1"
+        "typescript": "3.4.5"
     }
 }
