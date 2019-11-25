@@ -8,6 +8,8 @@ import { PageHomeComponent } from './pages/page-home/page-home.component';
 import { PagePedidosComponent } from './pages/processos/page-pedidos/page.pedidos.component';
 import { RaizComponent } from './raiz/raiz.component';
 import { PageDepartamentoComponent } from './pages/cadastros/page-departamento/page-departamento.component';
+import { PageAmbienteComponent } from './pages/cadastros/page-ambiente/page-ambiente.component';
+import { PageMesaComponent } from './pages/cadastros/page-mesa/page-mesa.component';
 
 
 
@@ -23,8 +25,10 @@ export const routes: Routes = [
             { path: 'home-page', component: PageHomeComponent },
             { path: 'pedidos', component: PagePedidosComponent },
             { path: 'secao', component: PageSecaoComponent },
-            { path: 'Departamento', component: PageDepartamentoComponent },
-            { path: 'Fornecedor', component: PageFornecedorComponent }
+            { path: 'departamento', component: PageDepartamentoComponent },
+            { path: 'fornecedor', component: PageFornecedorComponent },
+            { path: 'ambiente', component: PageAmbienteComponent },
+            { path: 'mesa', component: PageMesaComponent }
 
         ]
     },

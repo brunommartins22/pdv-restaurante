@@ -87,6 +87,8 @@ import { PagePedidosComponent } from './pages/processos/page-pedidos/page.pedido
 import { RaizComponent } from './raiz/raiz.component';
 import { PageDepartamentoComponent } from './pages/cadastros/page-departamento/page-departamento.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { PageAmbienteComponent } from './pages/cadastros/page-ambiente/page-ambiente.component';
+import { PageMesaComponent } from './pages/cadastros/page-mesa/page-mesa.component';
 
 
 
@@ -189,6 +191,8 @@ registerLocaleData(ptBr)
         PageSecaoComponent,
         PageDepartamentoComponent,
         PageFornecedorComponent,
+        PageAmbienteComponent,
+        PageMesaComponent
 
     ],
     providers: [
