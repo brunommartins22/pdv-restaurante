@@ -1,4 +1,4 @@
-<crud [componente]="this" permissao="1.06" titulo="Fornecedor">
+<crud [componente]="this" permissao="" titulo="Fornecedor">
     <div detalhes>
         <div class="ui-g">
             <div class="ui-g-12">
@@ -7,7 +7,6 @@
                     <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
                         <p-selectButton [options]="listaPessoas" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa">
                         </p-selectButton>
-
                     </div>
 
                     <div class="ui-g-12" *ngIf="objetoSelecionado.id != null || objetoSelecionado.id != undefined">
@@ -256,6 +255,7 @@
                             <button pButton icon="fa fa-times" label="Cancelar"></button>
                         </div>
                     </p-footer>
+
                 </p-dialog>
             </div>
         </div>
