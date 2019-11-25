@@ -4,7 +4,7 @@
         <div class='ui-g'>
             <div class='ui-g-12'>
                 <div class='row'>
-                 
+
                     <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
                         <p-selectButton [options]="dadosStatus" [(ngModel)]="objetoSelecionado.ativo">
                         </p-selectButton>
@@ -16,13 +16,15 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-6">
-                        <inputText label='Descrição do Ambiente' md='12' [(ngModel)]='objetoSelecionado.nomeAmbiente'>
+                        <inputText label='Descrição do Ambiente' md='12' [(ngModel)]='objetoSelecionado.nomeAmbiente'
+                        [disabled]="!objetoSelecionado.ativo">
                         </inputText>
                     </div>
                     <div class="ui-g-12 ui-md-3">
                         <label>Nº de Mesas</label><br>
                         <input type="text" pInputText [(ngModel)]="objetoSelecionado.quantidadeMesas"
-                            style="width:100%" />
+                            style="width:100%"
+                            [disabled]="!objetoSelecionado.ativo"/>
                         <p-slider [(ngModel)]="objetoSelecionado.quantidadeMesas" [style]="{'width':'100%'}"></p-slider>
                     </div>
                 </div>

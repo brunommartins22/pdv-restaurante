@@ -96,9 +96,9 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listTelefone" dataKey="endereco.id"
+                            <p-table [value]="objetoSelecionado.pessoa.listaTelefone" [dataKey]="telefoneSelecionado.numero"
                             selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="telefoneSelecionado" [responsive]="false"
+                            [(selection)]="telefoneTabela" [responsive]="false"
                             (onRowSelect)="onRowSelectTelefone($event)" (onRowUnselect)="onRowUnselectTelefone($event)">
 
                             <ng-template pTemplate="caption">
@@ -118,16 +118,17 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th style="text-align: center;width: 45px !important;">Tipo</th>
-                                    <th style="text-align: center;width: 10px !important;">Operadora</th>
-                                    <th style="text-align: center;width: 30px !important;">Número</th>
+                                    <th style="text-align: center;width: 10px !important;">Tipo</th>
+                                    <th style="text-align: center;width: 20px !important;">Operadora</th>
+                                    <th style="text-align: center;width: 40px !important;">Número</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td style="text-align: center;width: 135px !important;">{{item.tipo}}</td>
-                                    <td style="text-align: center;width: 80px !important;">{{item.nmOperadora}}</td>
-                                    <td style="text-align: justify;width: 240px !important;">{{item.numero}}</td>
+
+                            <ng-template pTemplate="body" let-item let-rowIndex="rowIndex" >
+                                <tr [pSelectableRow]="item" [pSelectableRowIndex]="rowIndex">
+                                    <td style="text-align: center;width: 10px !important;">{{item.tipo}}</td>
+                                    <td style="text-align: center;width: 20px !important;">{{item.nmOperadora}}</td>
+                                    <td style="text-align: justify;width: 40px !important;">{{item.numero}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -238,7 +239,7 @@
 
                                 <div class="ui-g-12">
                                     <inputMask id="fone1" autocomplete="off" placeholder="(___) _ ____-____" md="12"
-                                        label="Fone 01" [(ngModel)]="telefoneSelecionado.Numero"
+                                        label="Fone 01" [(ngModel)]="telefoneSelecionado.numero"
                                         [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999':telefoneSelecionado.tipo == 2 ?'(999) 9999-9999':''"
                                         [disabled]="!telefoneSelecionado.ativo"></inputMask>
 
@@ -250,7 +251,7 @@
 
                     <p-footer>
                         <div class="row">
-                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"
+                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar" (click)="salvarTelefone()"
                                 [disabled]="!telefoneSelecionado.ativo"></button>
                             <button pButton icon="fa fa-times" label="Cancelar"></button>
                         </div>

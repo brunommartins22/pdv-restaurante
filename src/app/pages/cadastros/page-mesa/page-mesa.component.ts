@@ -26,7 +26,8 @@ export class PageMesaComponent extends CrudComponent {
         this.objetoSelecionado = new Object();
         this.loadCampoOrdenacao();
         this.loadListagemMesas();
-        super.iniciar('/mesas')
+        super.iniciar('/mesas');
     }
+
 
 }
