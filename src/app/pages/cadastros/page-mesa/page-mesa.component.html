@@ -1,0 +1,41 @@
+<crud [componente]='this' permissao='1.11' titulo='Mesa'>
+    <div detalhes>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="row">
+                    <div class="ui-g-12" *ngIf='objetoSelecionado.id!=undefined && objetoSelecionado.id!=null'>
+                        <inputText label='ID' md='2' [(ngModel)]='objetoSelecionado.id'></inputText>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <label>Nº da Mesa</label><br>
+                        <input type="text" pInputText [(ngModel)]="objetoSelecionado.quantidadeMesas"
+                            style="width:100%" />
+                        <p-slider [(ngModel)]="objetoSelecionado.numeroMesa" [style]="{'width':'100%'}"></p-slider>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <label>Nº de Pessoas</label><br>
+                        <input type="text" pInputText [(ngModel)]="objetoSelecionado.quantidadeMesas"
+                            style="width:100%" />
+                        <p-slider [(ngModel)]="objetoSelecionado.quantidadePessoas" [style]="{'width':'100%'}">
+                        </p-slider>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <!-- <p-multiSelect [options]="cars" [(ngModel)]="objetoSelecionado.listaAmbientes"
+                            [panelStyle]="{'width':'100%'}">
+                            <ng-template let-value pTemplate="selectedItems">
+                                <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+                                    <span>{{val}}</span>
+                                </div>
+                                <span *ngIf="!value || value.length === 0"
+                                    class="ui-multiselected-empty-token ui-corner-all">Selecione...</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+                            </ng-template>
+                        </p-multiSelect> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</crud>

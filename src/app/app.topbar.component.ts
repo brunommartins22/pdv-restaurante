@@ -8,6 +8,8 @@ import { RaizComponent } from './raiz/raiz.component';
 })
 export class AppTopBarComponent {
   resp: boolean;
-  constructor(public app: RaizComponent, public authenticationService: AuthenticationService) { }
+  constructor(public app: RaizComponent, public authenticationService: AuthenticationService) { 
+    document.body.classList.remove("body-img");
+  }
 
 }

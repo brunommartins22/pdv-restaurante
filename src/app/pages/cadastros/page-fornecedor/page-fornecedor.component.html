@@ -1,28 +1,23 @@
-<crud [componente]="this" [permissao]="1.06" titulo="Fornecedor">
+<crud [componente]="this" permissao="1.06" titulo="Fornecedor">
     <div detalhes>
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="row">
-                    <div class="ui-g-12">
-                        <div *ngFor="let item of listaPessoas; let indx = index">
-                            <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
-                                <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
-                                    <div style="position: relative;top:10px;left: 10px !important;">
-                                        <p-radioButton name="pessoa" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa"
-                                        [value]="item.value" [label]="item.label"></p-radioButton>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
+                        <p-selectButton [options]="listaPessoas" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa">
+                        </p-selectButton>
+
                     </div>
 
                     <div class="ui-g-12" *ngIf="objetoSelecionado.id != null || objetoSelecionado.id != undefined">
-                        <inputText id="id" md="1" disabled="true" label="Código" [(ngModel)]="objetoSelecionado.pessoa.id">
+                        <inputText id="id" md="1" disabled="true" label="Código"
+                            [(ngModel)]="objetoSelecionado.pessoa.id">
                         </inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                         <inputMask id="cpfCnpj" maxlength="19" md="12" class="abc"
+                        <inputMask id="cpfCnpj" maxlength="19" md="12" class="abc"
                             [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'"
                             [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'"
                             [(ngModel)]="objetoSelecionado.pessoa.cpfCnpj"
@@ -31,17 +26,20 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="razaoSocial" maxlength="60" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'" [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
+                        <inputText id="razaoSocial" maxlength="60" md="12"
+                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'Nome da Empresa': 'Razão Social'"
+                            [(ngModel)]="objetoSelecionado.pessoa.nomePessoa"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-5">
-                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia" [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
+                        <inputText id="fantasia" maxlength="60" md="12" label="Fantasia"
+                            [(ngModel)]="objetoSelecionado.pessoa.nomeFantasia"></inputText>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
                         <inputText id="ieRg" maxlength="12" md="12"
-                        [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
-                        [(ngModel)]="objetoSelecionado.pessoa.ieRg">
+                            [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
+                            [(ngModel)]="objetoSelecionado.pessoa.ieRg">
                         </inputText>
                     </div>
 
@@ -53,18 +51,17 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                        <p-table [value]="objetoSelecionado.pessoa.listEndereco"  selectionMode="single"
-                        [resizableColumns]="true" [scrollable]="true" scrollHeight="100px" [(selection)]="enderecoTabela"
-                        [responsive]="false"
-                        (onRowSelect)="onRowSelectEndereco($event)"
-                        (onRowUnselect)="onRowUnselectEndereco($event)">
+                        <p-table [value]="objetoSelecionado.pessoa.listEndereco" selectionMode="single"
+                            [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
+                            [(selection)]="enderecoTabela" [responsive]="false"
+                            (onRowSelect)="onRowSelectEndereco($event)" (onRowUnselect)="onRowUnselectEndereco($event)">
 
                             <ng-template pTemplate="caption">
 
                                 <div style="position: relative;top: -5px;">
                                     <label style="float: left;" class="mt-2"><i class="fa fa-map-marker"></i>
                                         Endereço</label>
-                                    <button  label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
+                                    <button label="Incluir" (click)="adicionarEndereco()" icon="fa fa-plus"
                                         pButton></button>
                                     <button label="Editar" (click)="editarEndereco()" icon="fa fa-edit"
                                         pButton></button>
@@ -75,7 +72,6 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <!-- <th style="text-align: center;width: 70px !important;">Código</th> -->
                                     <th style="text-align: center;width: 85px !important;">cep</th>
                                     <th style="text-align: justify;width: 200px !important;">Logradouro</th>
                                     <th style="text-align: center;width: 90px !important;">bairro</th>
@@ -87,7 +83,6 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
                                 <tr [pSelectableRow]="item" [pSelectableRowIndex]="rowIndex">
-                                    <!-- <td style="text-align: center;width: 70px !important;">{{item.id}}</td> -->
                                     <td style="text-align: center;width: 85px !important;">{{item.cep}}</td>
                                     <td style="text-align: justify;width: 200px !important;">{{item.logradouro}}</td>
                                     <td style="text-align: center;width: 90px !important;">{{item.bairro}}</td>
@@ -104,8 +99,8 @@
 
                         <p-table [value]="objetoSelecionado.pessoa.listTelefone" dataKey="endereco.id"
                             selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
-                            [(selection)]="telefoneSelecionado" [responsive]="false" (onRowSelect)="onRowSelectTelefone($event)"
-                            (onRowUnselect)="onRowUnselectTelefone($event)">
+                            [(selection)]="telefoneSelecionado" [responsive]="false"
+                            (onRowSelect)="onRowSelectTelefone($event)" (onRowUnselect)="onRowUnselectTelefone($event)">
 
                             <ng-template pTemplate="caption">
 
@@ -124,7 +119,6 @@
 
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <!-- <th style="text-align: center;width: 30px !important;">Código</th> -->
                                     <th style="text-align: center;width: 45px !important;">Tipo</th>
                                     <th style="text-align: center;width: 10px !important;">Operadora</th>
                                     <th style="text-align: center;width: 30px !important;">Número</th>
@@ -132,7 +126,6 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-item>
                                 <tr [pSelectableRow]="item">
-                                    <!-- <td style="text-align: center;width: 70px !important;">{{item.id}}</td> -->
                                     <td style="text-align: center;width: 135px !important;">{{item.tipo}}</td>
                                     <td style="text-align: center;width: 80px !important;">{{item.nmOperadora}}</td>
                                     <td style="text-align: justify;width: 240px !important;">{{item.numero}}</td>
@@ -148,16 +141,9 @@
                     <div class="ui-g" style="height: 420px;">
                         <div class="ui-g-12">
                             <div class="row">
-                                <div class="ui-g-12">
-                                    <div *ngFor="let item of statusEndereco; let indx = index">
-                                        <div class="ui-g-6 ui-md-3 ui-lg-2" style="cursor: pointer;">
-                                            <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
-                                                <div style="position: relative;top:10px;left: 10px !important;">
-                                                    <p-radioButton name="endereco" [(ngModel)]="enderecoSelecionado.ativo" [value]="item.value" [label]="item.label"></p-radioButton>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
+                                    <p-selectButton [options]="statusEndereco" [(ngModel)]="enderecoSelecionado.ativo">
+                                    </p-selectButton>
                                 </div>
 
                                 <div class="ui-g-12 ui-md-12">
@@ -211,7 +197,7 @@
                         </div>
                     </div>
                     <p-footer>
-                        <div class="row" >
+                        <div class="row">
                             <button class="mr-1" pButton icon="fa fa-check" label="Confirmar" (click)="salvarEndereco()"
                                 [disabled]="!enderecoSelecionado.ativo"></button>
                             <button pButton icon="fa fa-times" label="Cancelar"></button>
@@ -226,72 +212,53 @@
                     <div class="ui-g" style="height: 360px;">
                         <div class="ui-g-12">
                             <div class="row">
-                                <div class="ui-g-12">
-                                    <div *ngFor="let item of statusTelefone; let indx = index">
-                                        <div class="ui-g-6 ui-md-3 ui-lg-6" style="cursor: pointer;">
-                                            <div style="background-color: #5BB2C5;height: 40px;border-radius: 5px;">
-                                                <div style="position: relative;top:10px;left: 10px !important;">
-                                                    <p-radioButton name="telefone"
-                                                        [(ngModel)]="telefoneSelecionado.ativo" [value]="item.value"
-                                                        [label]="item.label"></p-radioButton>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
+                                    <p-selectButton [options]="statusTelefone" [(ngModel)]="telefoneSelecionado.ativo">
+                                    </p-selectButton>
                                 </div>
 
-                                <div class="ui-g-12">
-
-                                    <div class="ui-g-12 ui-md-12" style="position: relative;top: 2px;">
-                                        <label>Tipo</label><br>
-                                        <p-dropdown id="tipoTelefone" md="6" autoWidth="false" [filter]="true"
-                                            [options]="listaTelefone" [(ngModel)]="telefoneSelecionado.tipo"
-                                            [disabled]="!telefoneSelecionado.ativo">
-                                        </p-dropdown>
-                                    </div>
+                                <div class="ui-g-12" style="position: relative;top: 2px;">
+                                    <label>Tipo</label><br>
+                                    <p-dropdown id="tipoTelefone" autoWidth="false" [filter]="true"
+                                        [options]="listaTelefone" [(ngModel)]="telefoneSelecionado.tipo"
+                                        [disabled]="!telefoneSelecionado.ativo" [style]="{'width':'100%'}">
+                                    </p-dropdown>
                                 </div>
 
-                                <div class="ui-g-12 ui-md-2" style="position: relative;top: 2px;"
-                                    *ngIf="telefoneSelecionado.tipo == '1'" >
+
+                                <div class="ui-g-12" style="position: relative;top: 2px;"
+                                    *ngIf="telefoneSelecionado.tipo == '1'">
                                     <label>Operadora</label><br>
                                     <p-dropdown id="operadora" autoWidth="false" [filter]="true"
                                         [options]="listaOperadora" [(ngModel)]="telefoneSelecionado.nmOperadora"
-                                        (onChange)='loadOperadoras()'
+                                        (onChange)='loadOperadoras()' [style]="{'width':'100%'}"
                                         [disabled]="!telefoneSelecionado.ativo">
                                     </p-dropdown>
 
                                 </div>
 
                                 <div class="ui-g-12">
-                                    <inputMask id="fone1" autocomplete="off" placeholder="(___) _ ____-____" md="3"
+                                    <inputMask id="fone1" autocomplete="off" placeholder="(___) _ ____-____" md="12"
                                         label="Fone 01" [(ngModel)]="telefoneSelecionado.Numero"
-                                        mask="(999) 9 999  9-9999"
-                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999': '(999) 9999-9999'"
+                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999':telefoneSelecionado.tipo == 2 ?'(999) 9999-9999':''"
                                         [disabled]="!telefoneSelecionado.ativo"></inputMask>
 
                                 </div>
-
-                                <!-- <div class="ui-g-12">
-                                    <inputMask id="fone2" autocomplete="off" placeholder="(___) _ ____-____" md="3" label="Fone 02"
-                                        [(ngModel)]="telefoneSelecionado.Numero"
-                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999': '(999) 9999-9999'"></inputMask>
-                                </div> -->
 
                             </div>
                         </div>
                     </div>
 
-                            <p-footer>
-                                <div class="row">
-                                    <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"
-                                        [disabled]="!telefoneSelecionado.ativo"></button>
-                                    <button pButton icon="fa fa-times" label="Cancelar"></button>
-                                </div>
-                            </p-footer>
+                    <p-footer>
+                        <div class="row">
+                            <button class="mr-1" pButton icon="fa fa-check" label="Confirmar"
+                                [disabled]="!telefoneSelecionado.ativo"></button>
+                            <button pButton icon="fa fa-times" label="Cancelar"></button>
+                        </div>
+                    </p-footer>
                 </p-dialog>
             </div>
         </div>
-        {{indexEndereco | json}}
     </div>
 
 </crud>

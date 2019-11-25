@@ -24,6 +24,7 @@ export class PageFornecedorComponent extends CrudComponent {
     listaOperadora = [];
     statusEndereco = [];
     statusTelefone = [];
+    selectTipo=[];
 
     enderecoSelecionado: any = new Object();
     enderecoTabela: any;
@@ -41,8 +42,8 @@ export class PageFornecedorComponent extends CrudComponent {
 
     private loadPessoas() {
         this.listaPessoas = new Array();
-        this.listaPessoas.push({ label: 'Pessoa Fisica', value: 'FISICA' }),
-            this.listaPessoas.push({ label: 'Pessoa Juridica', value: 'JURIDICA' });
+        this.listaPessoas.push({ label: 'Pessoa Física', value: 'FISICA' }),
+            this.listaPessoas.push({ label: 'Pessoa Jurídica', value: 'JURIDICA' });
     }
 
     private loadStatusEndereco() {
