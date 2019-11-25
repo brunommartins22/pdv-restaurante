@@ -24,7 +24,7 @@ export class PageFornecedorComponent extends CrudComponent {
     listaOperadora = [];
     statusEndereco = [];
     statusTelefone = [];
-    selectTipo=[];
+    selectTipo = [];
 
     enderecoSelecionado: any = new Object();
     enderecoTabela: any;
@@ -133,10 +133,10 @@ export class PageFornecedorComponent extends CrudComponent {
     loadOperadoras() {
         this.listaOperadora = new Array();
         this.listaOperadora.push({ label: 'Selecione...', value: '' }),
-            this.listaOperadora.push({ label: '1-Oi', value: '1' }),
-            this.listaOperadora.push({ label: '2-Tim', value: '2' });
-        this.listaOperadora.push({ label: '3-Vivo', value: '3' }),
-            this.listaOperadora.push({ label: '4-Claro', value: '4' });
+            this.listaOperadora.push({ label: '1-Oi', value: 'Oi' }),
+            this.listaOperadora.push({ label: '2-Tim', value: 'Tim' });
+        this.listaOperadora.push({ label: '3-Vivo', value: 'Vivo' }),
+            this.listaOperadora.push({ label: '4-Claro', value: 'Claro' });
     }
 
 
@@ -149,7 +149,7 @@ export class PageFornecedorComponent extends CrudComponent {
         this.objetoSelecionado.pessoa = new Object();
         this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
         this.objetoSelecionado.pessoa.listEndereco = [];
-        this.objetoSelecionado.pessoa.listTelefone = [];
+        this.objetoSelecionado.pessoa.listaTelefone = [];
         this.objetoSelecionado.pessoa.listaOperadora = [];
         this.enderecoSelecionado = new Object();
         this.telefoneSelecionado = new Object();
@@ -188,16 +188,36 @@ export class PageFornecedorComponent extends CrudComponent {
 
     }
 
+
     validar() {
-        if (this.objetoSelecionado.pessoa.cpfCnpj == null ||
-            this.objetoSelecionado.pessoa.cpfCnpj === undefined ||
-            this.objetoSelecionado.pessoa.cpfCnpj === '') {
-            this.showError('Valor do Departamento não informado ou invalido!');
-            this.setarFocus('nomeDepartamento');
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.cpfCnpj)) {
+            this.showError("CNP não informado!")
+            this.setarFocus("nome_input");
             return false;
         }
 
-        return true;
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.nomePessoa)) {
+            this.showError("Razão Social não Informado!")
+            this.setarFocus("login_input");
+            return false;
+        }
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.nomeFantasia)) {
+            this.showError("Nome Fantasia não Informado!")
+            this.setarFocus("login_input");
+            return false;
+        }
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.ieRg)) {
+            this.showError("Rg ou ie do Usuário não informado!")
+            this.setarFocus("senha_input");
+            return false;
+
+        }
+        else {
+            return true;
+        }
     }
 
 
@@ -215,6 +235,7 @@ export class PageFornecedorComponent extends CrudComponent {
         this.enderecoTabela = null;
 
     }
+
 
     editarEndereco() {
         if (this.enderecoSelecionado.logradouro != null
@@ -284,22 +305,50 @@ export class PageFornecedorComponent extends CrudComponent {
         this.telefoneSelecionado = new Object();
         this.telefoneSelecionado.ativo = true;
         this.isVisibleTelefone = true;
+        this.indexTelefone = null;
+        this.telefoneTabela = null;
     }
 
     editarTelefone() {
-        this.isVisibleTelefone = true;
+        if (this.telefoneSelecionado.tipo != null
+            && this.telefoneSelecionado.tipo !== undefined) {
+            this.isVisibleTelefone = true;
+        } else {
+            this.showWarn('Selecione um Telefone!');
+        }
     }
 
     removerTelefone() {
         this.isVisibleTelefone = true;
     }
 
+    salvarTelefone() {
+        if (this.indexTelefone != null && this.indexTelefone != undefined) {
+            // this.objetoSelecionado.pessoa.listEndereco.forEach(element => {
+            //     if (element.id == this.enderecoSelecionado.id) {
+            //         element = this.enderecoSelecionado;
+            //     }
+            // });
+            this.objetoSelecionado.pessoa.listaTelefone[this.indexTelefone] = this.telefoneSelecionado;
+            this.telefoneTabela = this.telefoneSelecionado;
+
+        } else {
+            this.objetoSelecionado.pessoa.listaTelefone.push(this.telefoneSelecionado);
+            this.telefoneSelecionado = new Object();
+        }
+
+        this.isVisibleTelefone = false;
+    }
+
     onRowSelectTelefone(event) {
+        this.indexTelefone = event.index;
+        console.log(this.indexTelefone)
         this.telefoneSelecionado = event.data;
+
     }
 
     onRowUnselectTelefone(event) {
-        this.telefoneSelecionado = event.data;
+        this.indexTelefone = null;
     }
 
 
