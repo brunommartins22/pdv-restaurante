@@ -1,15 +1,22 @@
-import { Component } from "@angular/core";
-import { CrudComponent } from 'padrao';
+import { Component, OnInit } from "@angular/core";
+import { CrudComponent, StringUtils } from 'padrao';
 
+export class Ambiente {
+    id: number = null;
+    nomeAmbiente: string = null;
+    quantidadeMesas: number = 0;
+    ativo: boolean = true;
+
+}
 @Component({
     selector: 'app-page-ambiente',
     templateUrl: './page-ambiente.component.html'
 })
 
-
 export class PageAmbienteComponent extends CrudComponent {
 
     dadosStatus: any = [];
+    ambiente: Ambiente = new Ambiente();
 
     //********************* init methods ********************/
     private loadCampoOrdenacao() {
@@ -46,13 +53,29 @@ export class PageAmbienteComponent extends CrudComponent {
 
     acaoInserir() {
         super.acaoInserir();
+        this.ambiente = new Ambiente();
 
-        this.objetoSelecionado = {
-            id: null,
-            nomeAmbiente: '',
-            quatidadeMesas: 0,
-            ativo: true
-        };
+    }
+
+    acaoAlterar() {
+        super.acaoAlterar();
+        this.ambiente = this.objetoSelecionado;
+    }
+
+    validar() {
+
+        if (StringUtils.isEmpty(this.ambiente.nomeAmbiente)) {
+            this.showError('Descrição do ambiente não informado.');
+            return false;
+        }
+
+        if (this.ambiente.quantidadeMesas == 0) {
+            this.showError('Numero de mesas não informado.');
+            return false;
+        }
+
+        this.objetoSelecionado = this.ambiente;
+        return true;
     }
 
 

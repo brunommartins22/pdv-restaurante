@@ -4,26 +4,27 @@
         <div class='ui-g'>
             <div class='ui-g-12'>
                 <div class='row'>
-                 
+
                     <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
-                        <p-selectButton [options]="dadosStatus" [(ngModel)]="objetoSelecionado.ativo">
+                        <p-selectButton [options]="dadosStatus" [(ngModel)]="ambiente.ativo">
                         </p-selectButton>
 
                     </div>
 
-                    <div class='ui-g-12' *ngIf='objetoSelecionado.id!=undefined && objetoSelecionado.id !=null'>
-                        <inputText label='ID' md='1' [(ngModel)]='objetoSelecionado.id'></inputText>
+                    <div class='ui-g-12' *ngIf='ambiente.id!=undefined && ambiente.id !=null'>
+                        <inputText label='ID' md='1' [(ngModel)]='ambiente.id'></inputText>
                     </div>
 
-                    <div class="ui-g-12 ui-md-6">
-                        <inputText label='Descrição do Ambiente' md='12' [(ngModel)]='objetoSelecionado.nomeAmbiente'>
+                    <div class="ui-g-12 ui-md-4">
+                        <inputText label='Descrição do Ambiente' placeholder="Descrição do Ambiente" md='12'
+                            [(ngModel)]='ambiente.nomeAmbiente'>
                         </inputText>
                     </div>
-                    <div class="ui-g-12 ui-md-3">
+                    <div class="ui-g-12 ui-md-2">
                         <label>Nº de Mesas</label><br>
-                        <input type="text" pInputText [(ngModel)]="objetoSelecionado.quantidadeMesas"
-                            style="width:100%" />
-                        <p-slider [(ngModel)]="objetoSelecionado.quantidadeMesas" [style]="{'width':'100%'}"></p-slider>
+                        <p-spinner [inputStyle]="{'width':'300px'}" [(ngModel)]="ambiente.quantidadeMesas"></p-spinner>
+                        <!-- <input type="text" pInputText [(ngModel)]="ambiente.quantidadeMesas" style="width:100%" />
+                        <p-slider [(ngModel)]="ambiente.quantidadeMesas" [style]="{'width':'100%'}"></p-slider> -->
                     </div>
                 </div>
             </div>
