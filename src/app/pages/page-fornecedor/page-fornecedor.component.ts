@@ -187,16 +187,35 @@ export class PageFornecedorComponent extends CrudComponent {
 
     }
 
+
     validar() {
-        if (this.objetoSelecionado.pessoa.cpfCnpj == null ||
-            this.objetoSelecionado.pessoa.cpfCnpj === undefined ||
-            this.objetoSelecionado.pessoa.cpfCnpj === '') {
-            this.showError('Valor do Departamento não informado ou invalido!');
-            this.setarFocus('nomeDepartamento');
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.cpfCnpj)) {
+            this.showError("CNP não informado!")
+            this.setarFocus("nome_input");
             return false;
         }
 
-        return true;
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.nomePessoa)) {
+            this.showError("Razão Social não Informado!")
+            this.setarFocus("login_input");
+            return false;
+        }
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.nomeFantasia)) {
+            this.showError("Nome Fatasia não Informado!")
+            this.setarFocus("login_input");
+            return false;
+        }
+
+        if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.ieRg)) {
+            this.showError("Rg ou ie do Usuário não informado!")
+            this.setarFocus("senha_input");
+            return false;
+
+        } else {
+            return true;
+        }
     }
 
 

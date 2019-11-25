@@ -15,6 +15,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="ui-g-12" *ngIf="objetoSelecionado.id != null || objetoSelecionado.id != undefined">
                         <inputText id="id" md="1" disabled="true" label="Código" [(ngModel)]="objetoSelecionado.pessoa.id">
                         </inputText>
@@ -38,7 +39,9 @@
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
-                        <inputText id="ieRg" maxlength="12" md="12" [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'" [(ngModel)]="objetoSelecionado.pessoa.ieRg">
+                        <inputText id="ieRg" maxlength="12" md="12"
+                        [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'RG': 'Inscrição Estadual'"
+                        [(ngModel)]="objetoSelecionado.pessoa.ieRg">
                         </inputText>
                     </div>
 
