@@ -133,10 +133,10 @@ export class PageFornecedorComponent extends CrudComponent {
     loadOperadoras() {
         this.listaOperadora = new Array();
         this.listaOperadora.push({ label: 'Selecione...', value: '' }),
-            this.listaOperadora.push({ label: '1-Oi', value: 'Oi' }),
-            this.listaOperadora.push({ label: '2-Tim', value: 'Tim' });
-        this.listaOperadora.push({ label: '3-Vivo', value: 'Vivo' }),
-            this.listaOperadora.push({ label: '4-Claro', value: 'Claro' });
+            this.listaOperadora.push({ label: '1-Oi', value: '1' }),
+            this.listaOperadora.push({ label: '2-Tim', value: '2' });
+        this.listaOperadora.push({ label: '3-Vivo', value: '3' }),
+            this.listaOperadora.push({ label: '4-Claro', value: '4' });
     }
 
 
@@ -149,8 +149,7 @@ export class PageFornecedorComponent extends CrudComponent {
         this.objetoSelecionado.pessoa = new Object();
         this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
         this.objetoSelecionado.pessoa.listEndereco = [];
-        this.objetoSelecionado.pessoa.listaTelefone = [];
-        this.objetoSelecionado.pessoa.listaOperadora = [];
+        this.objetoSelecionado.pessoa.listTelefone = [];
         this.enderecoSelecionado = new Object();
         this.telefoneSelecionado = new Object();
         this.telefoneSelecionado.nmOperadora = new Object();
@@ -325,7 +324,7 @@ export class PageFornecedorComponent extends CrudComponent {
             this.confirmationService.confirm({
                 message: 'Confirma a remoção do Endereço ?',
                 accept: () => {
-                    this.objetoSelecionado.pessoa.listaTelefone.splice(this.indexTelefone, 1);
+                    this.objetoSelecionado.pessoa.listTelefone.splice(this.indexTelefone, 1);
                 },
                 reject: () => {
                     return;
@@ -345,11 +344,11 @@ export class PageFornecedorComponent extends CrudComponent {
             //         element = this.enderecoSelecionado;
             //     }
             // });
-            this.objetoSelecionado.pessoa.listaTelefone[this.indexTelefone] = this.telefoneSelecionado;
+            this.objetoSelecionado.pessoa.listTelefone[this.indexTelefone] = this.telefoneSelecionado;
             this.telefoneTabela = this.telefoneSelecionado;
 
         } else {
-            this.objetoSelecionado.pessoa.listaTelefone.push(this.telefoneSelecionado);
+            this.objetoSelecionado.pessoa.listTelefone.push(this.telefoneSelecionado);
             this.telefoneSelecionado = new Object();
         }
 
