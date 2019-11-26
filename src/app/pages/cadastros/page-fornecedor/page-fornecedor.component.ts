@@ -35,16 +35,13 @@ export class PageFornecedorComponent extends CrudComponent {
 
 
 
-
-
-
-    /*************************** init method address ****************************/
-
     private loadPessoas() {
         this.listaPessoas = new Array();
         this.listaPessoas.push({ label: 'Pessoa Física', value: 'FISICA' }),
             this.listaPessoas.push({ label: 'Pessoa Jurídica', value: 'JURIDICA' });
     }
+
+/*************************** init method address ****************************/
 
     private loadStatusEndereco() {
         this.statusEndereco = new Array();
@@ -109,11 +106,11 @@ export class PageFornecedorComponent extends CrudComponent {
             });
     }
 
-    /*************************** end method address ****************************/
+/*************************** end method address ****************************/
 
 
 
-    /*************************** init method fone ****************************/
+/*************************** init method fone ****************************/
 
 
     private loadStatusTelefone() {
@@ -141,7 +138,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
 
 
-    /*************************** end method fone ****************************/
+/*************************** end method fone ****************************/
 
 
     instance() {

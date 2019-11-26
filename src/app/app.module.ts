@@ -1,3 +1,4 @@
+import { PageClienteComponent } from './pages/cadastros/page-cliente/page-cliente.component';
 import { PageFornecedorComponent } from './pages/cadastros/page-fornecedor/page-fornecedor.component';
 import { PageSecaoComponent } from './pages/cadastros/page-secao/page-secao.component';
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
@@ -186,13 +187,15 @@ registerLocaleData(ptBr)
         RaizComponent,
 
 
+
         PageHomeComponent,
         PagePedidosComponent,
         PageSecaoComponent,
         PageDepartamentoComponent,
         PageFornecedorComponent,
         PageAmbienteComponent,
-        PageMesaComponent
+        PageMesaComponent,
+        PageClienteComponent
 
     ],
     providers: [

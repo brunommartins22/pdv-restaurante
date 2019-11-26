@@ -1,0 +1,27 @@
+<crud [componente]="this" permissao="" titulo="Cliente">
+    <div detalhes>
+
+        <div class="row">
+
+                    <div class="ui-g-12" style="font-size: 14px !important;font-family: sans-serif;">
+                        <p-selectButton [options]="listaPessoas" [(ngModel)]="objetoSelecionado.pessoa.tipoPessoa">
+                        </p-selectButton>
+                    </div>
+
+                    <div class="ui-g-12 " *ngIf="objetoSelecionado.id == null || objetoSelecionado.id == undefined">
+                            <inputText id="id" md="1" [disabled]="true" label="Código"
+                            [(ngModel)]="objetoSelecionado.pessoa.id"></inputText>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-2">
+                            <inputMask id="cpfCnpj" maxlength="19" md="12" class="abc"
+                                [label]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? 'CPF': 'CNPJ'"
+                                [mask]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '999.999.999-99': '99.999.999/9999-99'"
+                                [(ngModel)]="objetoSelecionado.pessoa.cpfCnpj"
+                                [placeholder]="objetoSelecionado.pessoa.tipoPessoa == 'FISICA' ? '___.___.___-__': '__.___.___/____-__'">
+                            </inputMask>
+                    </div>
+        </div>
+    </div>
+
+</crud>
