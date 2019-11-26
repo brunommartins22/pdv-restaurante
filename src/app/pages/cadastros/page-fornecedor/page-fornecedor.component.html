@@ -96,7 +96,7 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                            <p-table [value]="objetoSelecionado.pessoa.listaTelefone" [dataKey]="telefoneSelecionado.numero"
+                            <p-table [value]="objetoSelecionado.pessoa.listaTelefone" 
                             selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
                             [(selection)]="telefoneTabela" [responsive]="false"
                             (onRowSelect)="onRowSelectTelefone($event)" (onRowUnselect)="onRowUnselectTelefone($event)">

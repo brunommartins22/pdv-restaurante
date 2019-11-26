@@ -192,7 +192,7 @@ export class PageFornecedorComponent extends CrudComponent {
     validar() {
 
         if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.cpfCnpj)) {
-            this.showError("CNP não informado!")
+            this.showError("CNPJ não informado!")
             this.setarFocus("nome_input");
             return false;
         }
@@ -303,6 +303,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
     adicionarTelefone() {
         this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.tipo = this.listaTelefone[0];
         this.telefoneSelecionado.ativo = true;
         this.isVisibleTelefone = true;
         this.indexTelefone = null;
@@ -319,7 +320,22 @@ export class PageFornecedorComponent extends CrudComponent {
     }
 
     removerTelefone() {
-        this.isVisibleTelefone = true;
+
+        if (this.indexTelefone != null && this.indexTelefone != undefined) {
+            this.confirmationService.confirm({
+                message: 'Confirma a remoção do Endereço ?',
+                accept: () => {
+                    this.objetoSelecionado.pessoa.listaTelefone.splice(this.indexTelefone, 1);
+                },
+                reject: () => {
+                    return;
+                }
+            });
+
+        } else {
+            this.showWarn('Selecione um Endereço!');
+        }
+
     }
 
     salvarTelefone() {
@@ -342,9 +358,10 @@ export class PageFornecedorComponent extends CrudComponent {
 
     onRowSelectTelefone(event) {
         this.indexTelefone = event.index;
-        console.log(this.indexTelefone)
         this.telefoneSelecionado = event.data;
-
+        // console.log(this.indexEndereco);
+        // console.log(event.index);
+        // console.log(JSON.stringify(event));
     }
 
     onRowUnselectTelefone(event) {
