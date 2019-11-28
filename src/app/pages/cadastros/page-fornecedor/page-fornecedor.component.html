@@ -96,7 +96,7 @@
 
                     <div class="ui-g-12 ui-md-6">
 
-                            <p-table [value]="objetoSelecionado.pessoa.listaTelefone" [dataKey]="telefoneSelecionado.numero"
+                            <p-table [value]="objetoSelecionado.pessoa.listTelefone"
                             selectionMode="single" [resizableColumns]="true" [scrollable]="true" scrollHeight="100px"
                             [(selection)]="telefoneTabela" [responsive]="false"
                             (onRowSelect)="onRowSelectTelefone($event)" (onRowUnselect)="onRowUnselectTelefone($event)">
@@ -238,9 +238,9 @@
                                 </div>
 
                                 <div class="ui-g-12">
-                                    <inputMask id="fone1" autocomplete="off" placeholder="(___) _ ____-____" md="12"
+                                    <inputMask id="fone1" autocomplete="off" placeholder="(__)_ ____-____" md="12"
                                         label="Fone 01" [(ngModel)]="telefoneSelecionado.numero"
-                                        [mask]="telefoneSelecionado.tipo == 1 ? '(999) 9 9999-9999':telefoneSelecionado.tipo == 2 ?'(999) 9999-9999':''"
+                                        [mask]="telefoneSelecionado.tipo == 1 ? '(99)9 9999-9999':telefoneSelecionado.tipo == 2 ?'(999) 9999-9999':''"
                                         [disabled]="!telefoneSelecionado.ativo"></inputMask>
 
                                 </div>
@@ -259,6 +259,7 @@
 
                 </p-dialog>
             </div>
+            {{ objetoSelecionado | json }}
         </div>
     </div>
 

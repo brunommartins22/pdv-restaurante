@@ -1,3 +1,4 @@
+import { PageClienteComponent } from './pages/cadastros/page-cliente/page-cliente.component';
 import { PageFornecedorComponent } from './pages/cadastros/page-fornecedor/page-fornecedor.component';
 import { PageSecaoComponent } from './pages/cadastros/page-secao/page-secao.component';
 import { ModuleWithProviders } from '@angular/core';
@@ -28,7 +29,8 @@ export const routes: Routes = [
             { path: 'departamento', component: PageDepartamentoComponent },
             { path: 'fornecedor', component: PageFornecedorComponent },
             { path: 'ambiente', component: PageAmbienteComponent },
-            { path: 'mesa', component: PageMesaComponent }
+            { path: 'mesa', component: PageMesaComponent },
+            { path: 'cliente', component: PageClienteComponent }
 
         ]
     },

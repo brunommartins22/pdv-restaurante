@@ -35,16 +35,13 @@ export class PageFornecedorComponent extends CrudComponent {
 
 
 
-
-
-
-    /*************************** init method address ****************************/
-
     private loadPessoas() {
         this.listaPessoas = new Array();
         this.listaPessoas.push({ label: 'Pessoa Física', value: 'FISICA' }),
             this.listaPessoas.push({ label: 'Pessoa Jurídica', value: 'JURIDICA' });
     }
+
+/*************************** init method address ****************************/
 
     private loadStatusEndereco() {
         this.statusEndereco = new Array();
@@ -109,11 +106,11 @@ export class PageFornecedorComponent extends CrudComponent {
             });
     }
 
-    /*************************** end method address ****************************/
+/*************************** end method address ****************************/
 
 
 
-    /*************************** init method fone ****************************/
+/*************************** init method fone ****************************/
 
 
     private loadStatusTelefone() {
@@ -133,15 +130,15 @@ export class PageFornecedorComponent extends CrudComponent {
     loadOperadoras() {
         this.listaOperadora = new Array();
         this.listaOperadora.push({ label: 'Selecione...', value: '' }),
-            this.listaOperadora.push({ label: '1-Oi', value: 'Oi' }),
-            this.listaOperadora.push({ label: '2-Tim', value: 'Tim' });
-        this.listaOperadora.push({ label: '3-Vivo', value: 'Vivo' }),
-            this.listaOperadora.push({ label: '4-Claro', value: 'Claro' });
+            this.listaOperadora.push({ label: '1-Oi', value: '1' }),
+            this.listaOperadora.push({ label: '2-Tim', value: '2' });
+        this.listaOperadora.push({ label: '3-Vivo', value: '3' }),
+            this.listaOperadora.push({ label: '4-Claro', value: '4' });
     }
 
 
 
-    /*************************** end method fone ****************************/
+/*************************** end method fone ****************************/
 
 
     instance() {
@@ -149,8 +146,7 @@ export class PageFornecedorComponent extends CrudComponent {
         this.objetoSelecionado.pessoa = new Object();
         this.objetoSelecionado.pessoa.tipoPessoa = 'JURIDICA';
         this.objetoSelecionado.pessoa.listEndereco = [];
-        this.objetoSelecionado.pessoa.listaTelefone = [];
-        this.objetoSelecionado.pessoa.listaOperadora = [];
+        this.objetoSelecionado.pessoa.listTelefone = [];
         this.enderecoSelecionado = new Object();
         this.telefoneSelecionado = new Object();
         this.telefoneSelecionado.nmOperadora = new Object();
@@ -192,7 +188,7 @@ export class PageFornecedorComponent extends CrudComponent {
     validar() {
 
         if (StringUtils.isEmpty(this.objetoSelecionado.pessoa.cpfCnpj)) {
-            this.showError("CNP não informado!")
+            this.showError("CNPJ não informado!")
             this.setarFocus("nome_input");
             return false;
         }
@@ -303,6 +299,7 @@ export class PageFornecedorComponent extends CrudComponent {
 
     adicionarTelefone() {
         this.telefoneSelecionado = new Object();
+        this.telefoneSelecionado.tipo = this.listaTelefone[0];
         this.telefoneSelecionado.ativo = true;
         this.isVisibleTelefone = true;
         this.indexTelefone = null;
@@ -319,7 +316,22 @@ export class PageFornecedorComponent extends CrudComponent {
     }
 
     removerTelefone() {
-        this.isVisibleTelefone = true;
+
+        if (this.indexTelefone != null && this.indexTelefone != undefined) {
+            this.confirmationService.confirm({
+                message: 'Confirma a remoção do Endereço ?',
+                accept: () => {
+                    this.objetoSelecionado.pessoa.listTelefone.splice(this.indexTelefone, 1);
+                },
+                reject: () => {
+                    return;
+                }
+            });
+
+        } else {
+            this.showWarn('Selecione um Endereço!');
+        }
+
     }
 
     salvarTelefone() {
@@ -329,11 +341,11 @@ export class PageFornecedorComponent extends CrudComponent {
             //         element = this.enderecoSelecionado;
             //     }
             // });
-            this.objetoSelecionado.pessoa.listaTelefone[this.indexTelefone] = this.telefoneSelecionado;
+            this.objetoSelecionado.pessoa.listTelefone[this.indexTelefone] = this.telefoneSelecionado;
             this.telefoneTabela = this.telefoneSelecionado;
 
         } else {
-            this.objetoSelecionado.pessoa.listaTelefone.push(this.telefoneSelecionado);
+            this.objetoSelecionado.pessoa.listTelefone.push(this.telefoneSelecionado);
             this.telefoneSelecionado = new Object();
         }
 
@@ -342,9 +354,10 @@ export class PageFornecedorComponent extends CrudComponent {
 
     onRowSelectTelefone(event) {
         this.indexTelefone = event.index;
-        console.log(this.indexTelefone)
         this.telefoneSelecionado = event.data;
-
+        // console.log(this.indexEndereco);
+        // console.log(event.index);
+        // console.log(JSON.stringify(event));
     }
 
     onRowUnselectTelefone(event) {
