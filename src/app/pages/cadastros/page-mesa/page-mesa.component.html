@@ -1,8 +1,8 @@
 <crud [componente]='this' permissao='1.11' titulo='Mesa'>
-        
+
     <div detalhes>
 
-      
+
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="row">
@@ -11,28 +11,17 @@
                         </p-selectButton>
                     </div>
                     <div class="ui-g-12" *ngIf='mesa.id!=undefined && mesa.id!=null'>
-                        <inputText label='ID' md='1' [(ngModel)]='mesa.id'></inputText>
+                        <inputText label='ID' disabled="true" md='1' [(ngModel)]='mesa.id'></inputText>
                     </div>
-                    <div class="ui-g-12 ui-md-2">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
                         <label>Nº da Mesa</label><br>
-                        <p-spinner [inputStyle]="{'width':'300px'}" [(ngModel)]="mesa.numeroMesa"></p-spinner>
-                        <!-- <input type="text" pInputText [(ngModel)]="mesa.numeroMesa" style="width:100%" />
-                        <p-slider [(ngModel)]="mesa.numeroMesa" [style]="{'width':'100%'}"></p-slider> -->
+                        <p-spinner [inputStyle]="{'width':'100%'}" [(ngModel)]="mesa.numeroMesa"></p-spinner>
                     </div>
-                    <div class="ui-g-12 ui-md-2">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
                         <label>Nº de Pessoas</label><br>
-                        <p-spinner [inputStyle]="{'width':'300px'}" [(ngModel)]="mesa.quantidadePessoas"></p-spinner>
-                        <!-- <input type="text" pInputText [(ngModel)]="mesa.quantidadePessoas" style="width:100%" />
-                        <p-slider [(ngModel)]="mesa.quantidadePessoas" [style]="{'width':'100%'}">
-                        </p-slider> -->
+                        <p-spinner [inputStyle]="{width:'100%'}" [(ngModel)]="mesa.quantidadePessoas"></p-spinner>
                     </div>
-                    <div class="ui-g-12 ui-md-2">
-                        <label>Ambientes</label><br>
-                        <p-multiSelect [options]="ambientes" [(ngModel)]="mesa.listaAmbientes"
-                            [style]="{'width':'100%'}">
-                        </p-multiSelect>
-
-                    </div>
+                   
                 </div>
             </div>
         </div>

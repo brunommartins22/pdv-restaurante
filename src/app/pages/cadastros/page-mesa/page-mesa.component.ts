@@ -7,7 +7,7 @@ export class Mesa {
     id: number = null;
     numeroMesa: number = 0;
     quantidadePessoas: number = 0;
-    listaAmbientes: Array<Ambiente> = new Array();
+    status: boolean = true;
     ativo: boolean = true;
 }
 
@@ -20,7 +20,7 @@ export class PageMesaComponent extends CrudComponent {
 
     mesa: Mesa = new Mesa();
     dadosStatus: any = [];
-    ambientes = [];
+
 
 
     //********************* init Methods ********************/
@@ -32,8 +32,8 @@ export class PageMesaComponent extends CrudComponent {
 
     private loadListagemMesas() {
         this.cols = [{ field: 'id', header: 'Codigo', width: '80px' },
-        { field: 'numeroMesa', header: 'Numero da Mesa', width: '250px' },
-        { field: 'quantidadePessoas', header: 'Quantidade de Pessoas', width: '250px' }]
+        { field: 'numeroMesaDesc', header: 'Numero da Mesa', width: '250px' },
+        { field: 'quantidadePessoasDesc', header: 'Quantidade de Pessoas', width: '250px' }]
     }
 
     private loadStatusMesa() {
@@ -42,22 +42,7 @@ export class PageMesaComponent extends CrudComponent {
         this.dadosStatus.push({ label: 'Inativo', value: false });
     }
 
-    private loadAmbientes() {
-        this.httpUtilService.get("/ambientes").subscribe(data => {
 
-            if (data.json().hasOwnProperty('errorCode')) {
-                this.showError(data.text());
-            } else {
-                this.ambientes = [];
-                for (let item of data.json()) {
-                    this.ambientes.push({ label: item.nomeAmbiente, value: item });
-                }
-            }
-
-        }, erro => {
-            this.showError(erro.message);
-        })
-    }
 
     //******************** end Methods **********************/
 
@@ -73,12 +58,13 @@ export class PageMesaComponent extends CrudComponent {
         super.acaoInserir();
         this.mesa = new Mesa();
         this.loadStatusMesa();
-        this.loadAmbientes();
+
     }
 
     acaoAlterar() {
         super.acaoAlterar();
-        this.loadAmbientes();
+        this.loadStatusMesa();
+
         this.mesa = this.objetoSelecionado;
     }
 
@@ -94,10 +80,7 @@ export class PageMesaComponent extends CrudComponent {
             return false;
         }
 
-        if (this.mesa.listaAmbientes == []) {
-            this.showError("Nenhum ambiente informado.");
-            return false;
-        }
+
 
         this.objetoSelecionado = this.mesa;
         return true;

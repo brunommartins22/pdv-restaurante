@@ -29,8 +29,9 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                     { label: 'Fornecedor', icon: 'fa fa-fw fa-users', routerLink: ['/sys/fornecedor'] },
                     { label: 'Secao', icon: 'fa fa-fw fa-building-o', routerLink: ['/sys/secao'] },
                     { label: 'Departamento', icon: 'fa fa-fw fa-building-o', routerLink: ['/sys/departamento'] },
-                    { label: 'Ambiente', icon: 'fa fa-fw fa-map-marker', routerLink: ['/sys/ambiente'] },
-                    { label: 'Mesa', icon: 'fa fa-fw fa-ticket', routerLink: ['/sys/mesa'] }
+                    { label: 'Mesa', icon: 'fa fa-fw fa-ticket', routerLink: ['/sys/mesa'] },
+                    { label: 'Ambiente', icon: 'fa fa-fw fa-map-marker', routerLink: ['/sys/ambiente'] }
+                    
                 ]
             },
             {

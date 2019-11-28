@@ -1,6 +1,7 @@
 <crud [componente]='this' permissao='1.10' titulo='Ambiente'>
 
     <div detalhes>
+        {{ambiente|json}}
         <div class='ui-g'>
             <div class='ui-g-12'>
                 <div class='row'>
@@ -22,9 +23,36 @@
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <label>Nº de Mesas</label><br>
-                        <p-spinner [inputStyle]="{'width':'300px'}" [(ngModel)]="ambiente.quantidadeMesas"></p-spinner>
-                        <!-- <input type="text" pInputText [(ngModel)]="ambiente.quantidadeMesas" style="width:100%" />
-                        <p-slider [(ngModel)]="ambiente.quantidadeMesas" [style]="{'width':'100%'}"></p-slider> -->
+                        <p-spinner [inputStyle]="{'width':'100%'}" [(ngModel)]="ambiente.quantidadeMesas"></p-spinner>
+
+                    </div>
+                    <div class="ui-g-12">
+                        <label>Mesas</label><br>
+                        <!-- <p-multiSelect class="ui-g-12 ui-lg-6" [options]="mesas" maxSelectedLabels="10"
+                            [(ngModel)]="ambiente.listMesas">
+                            <ng-template let-ambiente.listMesas pTemplate="selectedItems">
+                                <span *ngFor="let selectedCar of ambiente.listMesas">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-item let-i="index" pTemplate="item">
+                                <div style="font-size:14px;float:right;margin-top:4px">{{item.label}}</div>
+                            </ng-template>
+                        </p-multiSelect> -->
+
+                        <p-multiSelect class="ui-g-12 ui-lg-6" [options]="mesas" maxSelectedLabels="10"  (onClick)="loadStatusMesas($event)"
+                            [(ngModel)]="ambiente.listMesas" [selectionLimit]='ambiente.quantidadeMesas' [style]="{'width':'100%'}">
+                            <ng-template let-value pTemplate="selectedItems">
+                                <div *ngFor="let val of value" class="ui-multiselected-item-token ui-corner-all">
+                                    <span >Mesa {{val.numeroMesa}}</span>
+                                </div>
+                                <span *ngIf="!value || value.length === 0"
+                                    class="ui-multiselected-empty-token ui-corner-all">Selecione...</span>
+                            </ng-template>
+                            <ng-template let-item pTemplate="item" >
+                                <!-- {{item|json}} -->
+                                <div style="font-size:14px;margin-left: 30px !important;margin-top:-20px !important" >{{item.label}}</div>
+                            </ng-template>
+                        </p-multiSelect>
+
                     </div>
                 </div>
             </div>

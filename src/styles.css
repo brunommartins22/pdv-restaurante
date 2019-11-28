@@ -5,6 +5,7 @@
     }
 }
 
+
 .body-img {
     background-image: url("../src/assets/images/pdv-tela-login.png") !important;
     background-size: cover;
@@ -51,6 +52,12 @@
     top: -60px!important;
     cursor: pointer !important;
 }
+
+ /* componentes */
+.ui-spinner{
+    width: 100% !important;
+}
+
 
 .ui-dropdown {
     height: 32px;
