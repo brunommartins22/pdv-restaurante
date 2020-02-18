@@ -89,15 +89,10 @@ export class PageFornecedorComponent extends CrudComponent {
                     this.enderecoSelecionado.logradouro = endereco.logradouro;
                     this.enderecoSelecionado.complemento = endereco.complemento;
                     this.enderecoSelecionado.bairro = endereco.bairro;
+                    this.enderecoSelecionado.cidade=endereco.localidade;
+                    this.enderecoSelecionado.estado = endereco.uf
                     this.errocep = false;
 
-                    this.httpUtilService.get('/cidades/' + endereco.ibge).subscribe(data => {
-                        const cidade = data.json();
-                        this.enderecoSelecionado.cidade = cidade;
-                        this.enderecoSelecionado.estado = cidade.cuF;
-                        this.carregarCidades();
-                        this.progressSpinner = false;
-                    });
                 }
 
             }, error => {
