@@ -36,7 +36,7 @@
         "pdfobject": "^2.1.1",
         "primeicons": "1.0.0",
         "primeng": "8.0.1",
-        "prismjs": "1.15.0",
+        "prismjs": "1.25.0",
         "quill": "1.1.8",
         "rxjs": "6.4.0",
         "rxjs-compat": "^6.5.2",
